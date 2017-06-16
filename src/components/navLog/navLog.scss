@@ -1,0 +1,48 @@
+//NAV
+.sideNav{
+  font-size: 15.251px;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  //float: right;
+}
+li {
+  float: left;
+  margin: 1rem;
+  padding: 0; 
+}
+li a {
+  display: block;
+  color: rgb(129, 116, 134);
+  text-align: center;
+  padding: 1rem;
+  margin: 0rem 1rem 0rem 1rem;
+  text-decoration: none;
+}
+li a:hover {
+  text-decoration: none;
+  color:white;
+}
+.li--box{
+  border:1px solid rgb(129, 116, 134);
+  border-radius: 4px;
+}
+.float--right{
+  float: right;
+  
+}
+.imagLog{
+  background-color: gray;
+  float: left;
+  position: fixed;
+}
+.imag-background{
+	background-image: url("../../images/backgroundlogin.svg");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}

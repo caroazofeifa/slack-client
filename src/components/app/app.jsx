@@ -7,18 +7,14 @@ import './app.scss';
 const reactRouter = require('react-router-dom');
 
 const Route = reactRouter.Route;
-// const Link = reactRouter.Link;
-const AppContainer = require('../../containers/AppContainer');
+
+const LoginContainer = require('../../containers/LoginContainer');
 
 class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className='container-fluid'>
-          <div className='row' id='mainView'>
-             <Route path='/' component={ AppContainer } />
-          </div>
-        </div>
+        <Route path='/' component={ LoginContainer } />
       </Router>
     );
   }

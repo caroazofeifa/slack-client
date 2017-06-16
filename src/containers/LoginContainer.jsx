@@ -11,9 +11,11 @@ class LoginContainer extends React.Component {
   }
   render() {
     return (
-      <div className='container-fluid'>
-        <Nav />
-        <Modal />
+      <div>
+        <div className='container-fluid'>
+          <Nav />
+        </div>
+          <Modal />
       </div>
     );
   }

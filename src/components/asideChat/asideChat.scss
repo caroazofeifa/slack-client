@@ -43,6 +43,9 @@ $height-144: calc(100vh - 144px);
     align-items: center;
     background-color: $brand-color;
   }
+  .header-content{
+    margin-top: 15px;
+  }
   .body{
     height: $main__hight;
     background-color: $brand-color-medium;

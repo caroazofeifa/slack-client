@@ -12,14 +12,12 @@ class Nav extends React.Component {
   }
   render() {
     return (
-      <div className='row'>
-        <div className='header'>
+      <div className=''>
+        <header className='row header'>      
+          <a className='imagLog' ><img className='' src={ `${preload}icon.png` } /></a>                
           <div className='col-md-12'>
             <nav className='sideNav'>
-              <ul>
-                <li>
-                  <a className='imagLog' ><img className='' src={ `${preload}navbarlogo.svg` } /></a>
-                </li>
+              <ul>                
                 <li className='float--right' >
                   <a className='li--box' >Your teams </a>
                 </li>
@@ -35,14 +33,14 @@ class Nav extends React.Component {
               </ul>
             </nav>
           </div>
-        </div>
+        </header>
         <div className='image-background row imag-background'>
-          <div className='col-md-12'>.
-          </div>
+          <div className='col-md-12' />
+          {/*</div>*/}
         </div>
         <div className='background row'>
-          <div className='col-md-12'>.
-          </div>
+          <div className='col-md-12' />
+          {/*</div>*/}
         </div>
       </div>
     );

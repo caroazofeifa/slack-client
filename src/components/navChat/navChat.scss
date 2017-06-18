@@ -1,0 +1,28 @@
+@import '../../scss/helpers/_variables';
+// @import '../../scss/helpers/_variables';
+// //HEADER
+// .header__position{
+//   box-shadow: 0px 11px 65px 0px rgba(21, 15, 24, 0.15);
+//   z-index: 1;
+// }
+// .header__left{
+//   background-color: $header-left__background;
+// }
+// .header__center{
+//   background-color: $header-right__background;
+// }
+// .header__right{
+//   background-color: $header-right__background;
+// }
+.header__position{
+  height: $header__hight;
+	background-color: $header-right__background;
+}
+// header{
+//   height: $header__hight;
+// 	background-color: $header-right__background;
+// }
+// .header__center{
+//   height: $header__hight;
+// 	background-color: $header-right__background;
+// }

@@ -8,13 +8,15 @@ const reactRouter = require('react-router-dom');
 
 const Route = reactRouter.Route;
 
-const LoginContainer = require('../../containers/LoginContainer');
+//const LoginContainer = require('../../containers/LoginContainer');
+
+const ChatContainer = require('../../containers/ChatContainer');
 
 class App extends React.Component {
   render() {
     return (
       <Router>
-        <Route path='/' component={ LoginContainer } />
+        <Route path='/' component={ ChatContainer } />
       </Router>
     );
   }

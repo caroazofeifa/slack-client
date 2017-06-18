@@ -1,14 +1,11 @@
-// * {
-//   box-sizing: border-box;
-//   margin: 0;
-//   padding: 0;
-// }
+$height__input: 7vh;
+
 .wrapper{
   height: 100vh;
 }
 .header{
   background-color: #3e3044;
-  height: 8.6767vh;
+  //height: 8.6767vh;
   margin: 0;
 }
 .image-background{
@@ -58,7 +55,7 @@
   outline: none;
   margin: 0.5rem;
   border: none;
-  height: 7vh;
+  height: $height__input;
   width: 47.8rem;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   padding-left:10px;
@@ -75,7 +72,7 @@
   outline: none;
   border: none;
   margin: 1rem 0rem 4rem 0.5rem;
-  height: 7vh;
+  height: $height__input;
   width: 37rem;
   font-size: 15.251px;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -93,7 +90,7 @@
   box-shadow: none;
   border: none;
   margin: 1rem 0.5rem 4rem 0rem;
-  height: 7vh;
+  height: $height__input;
 }
 .imgArrow{
   width: 3rem;
@@ -114,4 +111,122 @@
   line-height: 1.705;
   text-align: center;
   margin-left: 0.5rem;
+}
+
+@media only screen and (max-width: 300px) {
+  .modalLogin{
+    height: 70%;
+    width: 95%;//45%;//44.53125%;
+    top: 24.6987vh;
+    //left: 27.734%;
+    margin: 0px 2.5% 0px 2.5%;
+  }
+  .imageLogo{
+    margin: 5rem 30% 0rem 30%;
+    width: 35%;
+  }
+  .inputText{
+    width: 7rem;
+  }
+  .inputEmail{
+    width: 17.8rem;
+  }
+}
+
+/* Mobile Styles */
+@media only screen and (min-width: 301px) and (max-width: 480px) {
+  .modalLogin{
+    height: 70%h;
+    width: 90%;//45%;//44.53125%;
+    top: 24.6987vh;
+    //left: 27.734%;
+    margin: 0px 5% 0px 5%;
+  }
+  .imageLogo{
+    margin: 5rem 30% 0rem 30%;
+    width: 40%;
+  }
+  .inputText{
+    width: 15rem;
+  }
+  .inputEmail{
+    width: 25.8rem;
+  }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 481px) and (max-width: 630px) {
+  body {
+    background-color: #F5CF8E; /* Yellow */
+  }
+  .modalLogin{
+    height: 70%h;
+    width: 90%;//45%;//44.53125%;
+    top: 24.6987vh;
+    //left: 27.734%;
+    margin: 0px 5% 0px 5%;
+  }
+  .imageLogo{
+    margin: 5rem 30% 0rem 30%;
+    width: 40%;
+  }
+  .inputText{
+    width: 27rem;
+  }
+  .inputEmail{
+    width: 37.8rem;
+  }
+}
+@media only screen and (min-width: 631px) and (max-width: 992px) {
+  .modalLogin{
+    //height: 70%h;
+    width: 70%;//45%;//44.53125%;
+    margin: 0px 15% 0px 15%;
+  }
+  .imageLogo{
+    margin: 5rem 30% 0rem 30%;
+    width: 40%;
+  }
+  .inputText{
+    width: 30rem;
+  }
+  .inputEmail{
+    width: 40.8rem;
+  }
+}
+/* Desktop Styles */
+@media only screen and (min-width: 993px) {
+  body {
+    background-color: #B2D6FF; /* Blue */
+  }
+}
+///////////////////////////////////////////////////////////////////////////////
+
+/* Mobile Styles */
+@media only screen and (max-height: 530px) {
+  .modalLogin{
+    height:35.7rem;
+    top: 15.6987vh;
+  }
+  .title{
+    margin: 0rem 1rem 1rem 1rem;
+  }
+  .imgArrow{
+    width: 2rem;
+    height: 2rem
+  }
+}
+/* Tablet Styles */
+@media only screen and (min-height: 531px) and (max-height: 620px) {
+  .modalLogin{
+    height:35.7rem;
+    top: 18.6987vh;
+  }
+  .title{
+    margin: 0rem 1rem 2rem 1rem;
+  }
+}
+/* Desktop Styles */
+@media only screen and (min-height: 621px) {
+
 }

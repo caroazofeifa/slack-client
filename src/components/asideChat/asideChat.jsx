@@ -20,7 +20,7 @@ class Aside extends React.Component {
           </div>
         </header>
         <div className='col-md-12 body'>
-          <div className='body-wrapper aside-margin-left'>
+          <div className='body-wrapper aside-margin-left scrollbar2' id='style-2'>
             <div className='channels-info'>
               <a><span className='channels-options'>ALL UNREADS</span></a>
               <a><span className='channels-options'>ALL THREADS</span></a>

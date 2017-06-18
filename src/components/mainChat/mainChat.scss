@@ -3,9 +3,32 @@ $marginCalc: calc((8.7vh - 30px)/2);
 
 .mainChat{
   max-height: $main__hight;
+  // overflow: hidden;
+  // overflow-y: auto;
+  // position:relative;   
+}
+.scrollbar
+{
+	background:#F3F3F3;
   overflow: hidden;
   overflow-y: auto;
-  position:relative; 
+  position:relative;   
+}
+#style-1::-webkit-scrollbar-track
+{
+	border-radius: 10px;
+	background-color: #F3F3F3;
+}
+#style-1::-webkit-scrollbar
+{
+  border-radius: 10px;
+	width: 12px;
+	background-color: #F5F5F5;
+}
+#style-1::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-color: #D6D6D6;
 }
 .messageEntry{
   display: flex;

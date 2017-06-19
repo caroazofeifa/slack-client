@@ -8,11 +8,13 @@
   border-width: 1px;
   border-color: rgb(231, 231, 231);
   background-color: rgb(249, 249, 249);
+  border-radius: none;
 }
 .listContainer > ul {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: grid;
 }
 .listContainer > ul > li {
   list-style: none;
@@ -29,7 +31,12 @@
   left: 85%;
   // transform: rotate(270deg);
 }
-
+.list-group-item{
+  font-size: 16px;
+  font-family: "Open Sans";
+  color: rgb(65, 65, 66);
+  border-radius: none;
+}
 @media only screen and (max-width: 990px) {
     .details {
         display: none;

@@ -1,7 +1,7 @@
 import React from 'react';
-import axios from 'axios';
-import { Route } from 'react-router-dom';
-import { Redirect } from 'react-router';
+// import axios from 'axios';
+// import { Route } from 'react-router-dom';
+// import { Redirect } from 'react-router';
 
 const io = require('socket.io-client');
 
@@ -15,7 +15,7 @@ class AppContainer extends React.Component {
       username: '',
       otheruser: '',
       data: ['holi'],
-      usernames: {'ja':'ja'},
+      usernames: { ja: 'ja' },
       message: '',
     };
     this.handleChangeMessage = this.handleChangeMessage.bind(this);

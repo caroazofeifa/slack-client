@@ -1,5 +1,10 @@
 import React from 'react';
+import store from '../../redux/store';
+import Cookies from 'universal-cookie';
+import { SET_USER_DATA } from '../../redux/actions/types';
+
 import './asideChat.scss';
+
 
 const preload = '../src/images/';
 
@@ -7,7 +12,19 @@ class Aside extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
     };
+  }
+  componentWillMount() {
+    const cookies = new Cookies();
+    const token = cookies.get('token');
+    if (token) {
+      store.dispatch({
+        type: 'SET_USER_DATA',
+        userData: token
+      })
+    }
+    this.setState({ name: store.getState().userData.userData.firstName });
   }
   render() {
     return (
@@ -16,7 +33,7 @@ class Aside extends React.Component {
         <header className='col-md-12 header'>
           <div className='header-content aside-margin-left'>
              <span className='white-text'>Konrad Group</span>
-             <span className='user-status online'>Jhon Doe</span>
+             <span className='user-status online'>{ this.state.name }</span>
           </div>
         </header>
         <div className='col-md-12 body'>

@@ -12,12 +12,12 @@ class Nav extends React.Component {
   }
   render() {
     return (
-      <div className=''>
-        <header className='row header'>      
-          <a className='imagLog' ><img className='' src={ `${preload}icon.png` } /></a>                
+      <div className='container-fluid'>
+        <header className='row header'>
+          <a className='imagLog' ><img className='' src={ `${preload}icon.png` } /></a>
           <div className='col-md-12'>
             <nav className='sideNav'>
-              <ul>                
+              <ul>
                 <li className='float--right' >
                   <a className='li--box' >Your teams </a>
                 </li>

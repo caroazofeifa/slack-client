@@ -23,6 +23,7 @@ class Menu extends React.Component {
         <NavChat />
         <MainChat
           chatInfo={ this.props.chatInfo }
+          sendMessage={ this.props.sendMessage }
         />
         <RightAside />
       </div>

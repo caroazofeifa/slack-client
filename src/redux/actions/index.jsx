@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-import { SET_USER_DATA, SET_CHAT, SET_MESSAGE } from './types';
+import { SET_USER_DATA, SET_CHAT, SET_MESSAGE, UPDATE_MESSAGE } from './types';
 import store from '../../redux/store';
 
 const API_URL = 'http://localhost:3000/api';
@@ -116,6 +116,49 @@ export function getChats(idOther, idMine) {
     .catch((error) => {
       console.log('Error getChats: ', error);
     });
+  };
+}
+
+export function updateChat(username, data, time, newChat) {
+  console.log('-----><');
+  return (dispatch) => {
+    const message = { 'owner': username, 'content': data, 'time': time };
+    console.log('Message', message);
+    console.log('Chat', newChat);
+    Promise.all([      
+      //saves the message, get the id to save in the chat.
+      axios.post(`${API_URL}/messages`, message)
+      .then(response => {
+        console.log('ID DEL NUEVO MENSAJE: ', response.data._id);
+        newChat.messages.push(response.data._id);
+        console.log('Chat UPDATE', newChat);
+        // saves the message in the chat
+        axios.put(`${API_URL}/chats/${newChat._id}`,newChat)
+        .then(response => {
+          console.log('Vamo a hacer dispatch: :)',response);
+          // dispatch({
+            
+          // });
+        })
+      }),      
+    ]).then(() => {
+      console.log('after promise')
+    })
+    .catch((error) => {
+      console.log('Error updateChat: ', error);
+    });
+  };
+}
+
+export function updateChatForIncommingMessage(username, data, time) {
+  console.log('-----> updateChatForIncommingMessage <');
+  return (dispatch) => {
+    const message = { '_id': time, 'owner': username, 'content': data, 'time': time };
+    console.log('Message', message);
+    dispatch({
+        type: UPDATE_MESSAGE,
+        messages: message,
+      });
   };
 }
 // export function getUserData({ id }) {

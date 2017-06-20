@@ -1,7 +1,6 @@
 import React from 'react';
 import './dateMessageChat.scss';
-
-const Message = require('../messageChat/messageChat');
+import Message from '../messageChat/messageChat';
 
 class DateMessage extends React.Component {
   constructor(props) {

@@ -1,4 +1,4 @@
-import { GET_CHAT, SET_CHAT, GET_MESSAGE, SET_MESSAGE } from '../actions/types';
+import { GET_CHAT, SET_CHAT, GET_MESSAGE, SET_MESSAGE, UPDATE_MESSAGE } from '../actions/types';
 
 const DEFAULT_STATE = {
   chat: [],
@@ -10,6 +10,13 @@ const chatReducer = (state, action) => {
 };
 const messageReducer = (state, action) => {
   return Object.assign({}, state, { messages: action.messages });
+};
+const updateMessageReducer = (state, action) => {
+  console.log('STATE', state);
+  console.log('ACT.MESS', action.messages);
+  const newMessages = state.messages;
+  newMessages.push(action.messages);
+  return Object.assign({}, state, { messages: newMessages });
 };
 
 
@@ -23,6 +30,8 @@ export default function (state = DEFAULT_STATE, action) {
       return state.messages;
     case SET_MESSAGE:
       return messageReducer(state, action);
+    case UPDATE_MESSAGE:
+      return updateMessageReducer(state, action);
     default:
       return null;
   }

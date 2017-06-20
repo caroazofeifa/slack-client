@@ -1,4 +1,5 @@
 import React from 'react';
+// import { render } from 'react-dom';
 import './mainChat.scss';
 
 const preload = '../../src/images/';
@@ -10,6 +11,15 @@ class Chat extends React.Component {
     super(props);
     this.state = {
     };
+    this.handleKeyPress =this.handleKeyPress.bind(this);
+  }
+  handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      const message = event.currentTarget.value;
+      this.props.sendMessage(message);
+      // this.refs.inpusMessage.value ='';
+      // render.findDOMNode(this.refs.form).value = '';
+    }
   }
   render() {
     return (
@@ -30,7 +40,7 @@ class Chat extends React.Component {
                 <button className='buttonPlus' href='#' id='' >
                   <img className='imgPlus' src={ `${preload}plus.svg` } />
                 </button>
-                <input className='inputMessage' type='text' placeholder='Message' />
+                <input name='inputMessage' ref='form' className='inputMessage' onKeyDown={ this.handleKeyPress } type='text' placeholder='Message' />
                 <button className='buttonSmile' href='#' id='' >
                   <img className='imgSmile' src={ `${preload}smile.svg` } />
                 </button>

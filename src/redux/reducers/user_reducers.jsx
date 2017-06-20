@@ -1,7 +1,5 @@
 import { GET_USER_DATA, SET_USER_DATA } from '../actions/types';
 
-// const INITIAL_STATE = {_id: '', firstName: '', lastName:'', email:''};
-
 const DEFAULT_STATE = {
   userData: { _id: '', firstName: '', lastName: '', email: '' },
 };

@@ -10,3 +10,8 @@ export const SET_USER_DATA = 'SET_USER_DATA';
 
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const SET_ALL_USERS = 'SET_ALL_USERS';
+
+export const GET_CHAT = 'GET_CHAT';
+export const SET_CHAT = 'SET_CHAT';
+export const GET_MESSAGE = 'GET_MESSAGE';
+export const SET_MESSAGE = 'SET_MESSAGE';

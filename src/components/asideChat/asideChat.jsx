@@ -10,9 +10,15 @@ class Aside extends React.Component {
     this.state = {
       contactsFilled: false,
     };
+    this.handleClick = this.handleClick.bind(this);
   }
   componentWillMount() {
     this.props.getUsers();
+  }
+  handleClick(event) {
+    // console.log(event.target.id);
+    this.props.startConversation(event.target.id);
+        // const name = event.currentTarget.value;
   }
   render() {
     if (store.getState().allUsers.allUsers.length > 1) {
@@ -49,7 +55,7 @@ class Aside extends React.Component {
               { (this.state.contactsFilled ?
                 store.getState().allUsers.allUsers
                 .map((user) => (
-                  <a key={ user._id }><span className='user-status online' >{ user.profile.firstName }</span></a>
+                  <a key={ user._id } onClick={ this.handleClick }><span className='user-status online' id={ user._id } >{ user.profile.firstName }</span></a>
                   ))
               : <div />) }
             </div>

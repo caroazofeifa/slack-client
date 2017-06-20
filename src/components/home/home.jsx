@@ -18,9 +18,12 @@ class Menu extends React.Component {
       <div className='row home'>
         <Aside
           getUsers={ this.props.getUsers }
+          startConversation={ this.props.startConversation }
         />
         <NavChat />
-        <MainChat />
+        <MainChat
+          chatInfo={ this.props.chatInfo }
+        />
         <RightAside />
       </div>
     );

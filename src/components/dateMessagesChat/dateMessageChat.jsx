@@ -18,7 +18,20 @@ class DateMessage extends React.Component {
           </h2>
         </div>
         <div className='col-md-12'>
-          <Message />
+          { this.props.chatInfo !== undefined && this.props.chatInfo !== null ?
+            this.props.chatInfo.messages !== undefined ?
+              this.props.chatInfo.messages
+              .map((message) => (
+                <Message
+                  key={ message._id }
+                  message={ message }
+                />
+              ))
+              :
+              null
+            :
+            null
+          }
         </div>
       </div>
     );

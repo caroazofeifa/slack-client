@@ -17,7 +17,9 @@ class Chat extends React.Component {
         <main className='main__position'>
           <div className='row'>
             <div className='col-md-12 main main__center mainChat scrollbar' id='style-1'>
-              <Messages />
+              <Messages
+                chatInfo={ this.props.chatInfo }
+              />
             </div>
           </div>
         </main>

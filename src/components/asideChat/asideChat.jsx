@@ -1,5 +1,5 @@
 import React from 'react';
-import store from '../../redux/store';
+// import store from '../../redux/store';
 import './asideChat.scss';
 
 const preload = '../src/images/';
@@ -8,33 +8,21 @@ class Aside extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      contactsFilled: false,
     };
     this.handleClick = this.handleClick.bind(this);
   }
-  componentWillMount() {
-    this.props.getUsers();
-  }
   handleClick(event) {
-    // console.log(event.target.id);
+    //TO DO: DESCONECTESE DEL SOCKET!!!
     this.props.startConversation(event.target.id);
-        // const name = event.currentTarget.value;
   }
   render() {
-    if (store.getState().allUsers.allUsers.length > 1) {
-      // console.log('TRUE',store.getState().allUsers.allUsers.length);
-      this.state.contactsFilled = true;
-    } else {
-      // console.log('FALSE');
-      this.state.contactsFilled = false;
-    }
     return (
       <div className='aside col-md-2'>
       <div className='row'>
         <header className='col-md-12 header'>
           <div className='header-content aside-margin-left'>
              <span className='white-text'>Konrad Group</span>
-             <span className='user-status online'>{ `${store.getState().userData.userData.firstName} ${store.getState().userData.userData.lastName}` }</span>
+             <span className='user-status online'>{ `${this.props.userData.userData.firstName} ${this.props.userData.userData.lastName}` }</span>
           </div>
         </header>
         <div className='col-md-12 body'>
@@ -52,8 +40,8 @@ class Aside extends React.Component {
             </div>
             <div className='direct-messages'>
               <span className='channels-options'>DIRECT MESSAGES</span>
-              { (this.state.contactsFilled ?
-                store.getState().allUsers.allUsers
+              { (this.props.allUsers.allUsers.length > 1 ?
+                this.props.allUsers.allUsers
                 .map((user) => (
                   <a key={ user._id } onClick={ this.handleClick }><span className='user-status online' id={ user._id } >{ user.profile.firstName }</span></a>
                   ))

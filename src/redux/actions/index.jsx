@@ -119,20 +119,18 @@ export function getChats(idOther, idMine) {
   };
 }
 
-export function updateChat(username, data, time, newChat) {
-  console.log('-----><');
+export function updateChat(username, data, time, newChat,socket) { 
   return (dispatch) => {
     const message = { 'owner': username, 'content': data, 'time': time };
-    console.log('Message', message);
-    console.log('Chat', newChat);
+    // console.log('Message', message);
+    // console.log('Chat', newChat);
     Promise.all([      
       //saves the message, get the id to save in the chat.
       axios.post(`${API_URL}/messages`, message)
       .then(response => {
         console.log('ID DEL NUEVO MENSAJE: ', response.data._id);
-        newChat.messages.push(response.data._id);
-        console.log('Chat UPDATE', newChat);
-        // saves the message in the chat
+        socket.emit('sendchat', data, time,response.data._id);
+        newChat.messages.push(response.data._id);        
         axios.put(`${API_URL}/chats/${newChat._id}`,newChat)
         .then(response => {
           console.log('Vamo a hacer dispatch: :)',response);
@@ -150,10 +148,9 @@ export function updateChat(username, data, time, newChat) {
   };
 }
 
-export function updateChatForIncommingMessage(username, data, time) {
-  console.log('-----> updateChatForIncommingMessage <');
+export function updateChatForIncommingMessage(username, data, time, id) {
   return (dispatch) => {
-    const message = { '_id': time, 'owner': username, 'content': data, 'time': time };
+    const message = { '_id': id, 'owner': username, 'content': data, 'time': time };
     console.log('Message', message);
     dispatch({
         type: UPDATE_MESSAGE,
@@ -161,9 +158,4 @@ export function updateChatForIncommingMessage(username, data, time) {
       });
   };
 }
-// export function getUserData({ id }) {
-//   return (dispatch) => {
-//     // console.log('GET', id);
-//   };
-// }
 

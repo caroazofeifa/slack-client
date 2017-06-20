@@ -12,7 +12,10 @@ $marginCalc: calc((8.7vh - 30px)/2);
 	background:#F3F3F3;
   overflow: hidden;
   overflow-y: auto;
-  position:relative;   
+  position:relative;
+  //This doesnt work in mozilla
+  // display: flex;
+  // flex-direction: column-reverse;
 }
 #style-1::-webkit-scrollbar-track
 {

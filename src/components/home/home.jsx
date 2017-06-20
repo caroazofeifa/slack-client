@@ -17,8 +17,9 @@ class Menu extends React.Component {
     return (
       <div className='row home'>
         <Aside
-          getUsers={ this.props.getUsers }
           startConversation={ this.props.startConversation }
+          allUsers={ this.props.allUsers }
+          userData={ this.props.userData }
         />
         <NavChat />
         <MainChat

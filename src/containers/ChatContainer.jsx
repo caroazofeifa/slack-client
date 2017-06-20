@@ -34,10 +34,11 @@ class ChatContainer extends React.Component {
     }
     //Socket
     socket = io.connect('http://localhost:3000');
-    socket.on('updatechat', (username, data, time) => {
+    socket.on('updatechat', (username, data, time, id) => {
       console.log('esta updeiteando chat');
-      this.updateChatIncommingMessage(username, data, time);
+      this.updateChatIncommingMessage(username, data, time, id);
     });
+    this.props.getUsers();
   }
   startConversation(id) {
     // console.log('Start conversation:' + id + ' & ' +this.props.userData.userData._id)
@@ -52,41 +53,28 @@ class ChatContainer extends React.Component {
     const yyyy = today.getFullYear();
     const h = today.getHours();
     const m = today.getMinutes();
-    const s = today.getMinutes();
-    const finalTime = `${dd}/${mm}/${yyyy} ${h}:${m}:${s}`;
+    const finalTime = `${dd}/${mm}/${yyyy} ${h}:${m}`;
     // console.log(this.props.userData.userData._id);
     // console.log(messageI);
     // console.log(finalTime);
     // console.log(this.props.chatInfo.chat);
     const chatUpdate = {'_id': this.props.chatInfo.chat._id, 'user1':this.props.chatInfo.chat.user1, 'user2':this.props.chatInfo.chat.user2, 'messages':this.props.chatInfo.chat.messages }
-    this.props.updateChat(this.props.userData.userData._id, messageI, finalTime, chatUpdate);
-    socket.emit('sendchat', messageI, finalTime,);
+    this.props.updateChat(this.props.userData.userData._id, messageI, finalTime, chatUpdate, socket);
   }
-  updateChatIncommingMessage(username, data, time){
+  updateChatIncommingMessage(username, data, time, id){
     console.log('new message!');
-    console.log('Mensaje: ', username, data, time);
-    this.props.updateChatForIncommingMessage(username, data, time);
+    console.log('Mensaje: ', username, data, time, id);
+    this.props.updateChatForIncommingMessage(username, data, time, id);
   }
   render() {
-    // socket.on('updatechat', function (username, data, time) {	
-    //   console.log('Mensaje: ', username, data, time);
-    //   if(this.props != undefined){
-      //   console.log('1');
-      //   if (this.props.chatInfo !== undefined &&  this.props.chatInfo !== null){
-      //     console.log('2');
-      //     const chatid = this.props.chatInfo.chat._id;
-      //     this.props.updateChat(username, data, time, chatid);
-      //   }
-      // }
-	  // });
     return (
       <div className='container-fluid'>
           <ChatHome
-            value={ this.props.allUsers }
-            getUsers={ this.props.getUsers }
             startConversation={ this.startConversation }
             chatInfo={ this.props.chatInfo }
             sendMessage={ this.sendMessage }
+            allUsers={ this.props.allUsers }
+            userData={ this.props.userData }
           />
       </div>
     );

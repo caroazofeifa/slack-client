@@ -17,8 +17,7 @@ class Chat extends React.Component {
     if (event.key === 'Enter') {
       const message = event.currentTarget.value;
       this.props.sendMessage(message);
-      // this.refs.inpusMessage.value ='';
-      // render.findDOMNode(this.refs.form).value = '';
+      event.currentTarget.value ='';
     }
   }
   render() {

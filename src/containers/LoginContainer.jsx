@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form';
 import { loginUser } from '../redux/actions/index';
 
@@ -22,7 +22,7 @@ class Login extends React.Component {
     };
   }
   handleFormSubmit(formProps) {
-    console.log('calling loginUser');
+    // console.log('calling loginUser');
     this.props.loginUser(formProps);
   }
   renderAlert() {

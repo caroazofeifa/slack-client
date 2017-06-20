@@ -16,7 +16,9 @@ class Menu extends React.Component {
   render() {
     return (
       <div className='row home'>
-        <Aside />
+        <Aside
+          getUsers={ this.props.getUsers }
+        />
         <NavChat />
         <MainChat />
         <RightAside />

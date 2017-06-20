@@ -1,27 +1,14 @@
 import React from 'react';
-import store from '../../redux/store';
-import './asideChat.scss';
 
-const preload = '../src/images/';
+import './contactAsideChat';
 
-class Aside extends React.Component {
+class Contact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      contactsFilled: false,
     };
   }
-  componentWillMount() {
-    this.props.getUsers();
-  }
   render() {
-    if (store.getState().allUsers.allUsers.length > 1) {
-      // console.log('TRUE',store.getState().allUsers.allUsers.length);
-      this.state.contactsFilled = true;
-    } else {
-      // console.log('FALSE');
-      this.state.contactsFilled = false;
-    }
     return (
       <div className='aside col-md-2'>
       <div className='row'>
@@ -46,12 +33,12 @@ class Aside extends React.Component {
             </div>
             <div className='direct-messages'>
               <span className='channels-options'>DIRECT MESSAGES</span>
-              { (this.state.contactsFilled ?
-                store.getState().allUsers.allUsers
-                .map((user) => (
-                  <a key={ user._id }><span className='user-status online' >{ user.profile.firstName }</span></a>
-                  ))
-              : <div />) }
+              <a><span className='user-status online'>Jhon Doe</span></a>
+              <a><span className='user-status online'>Jhon Doe</span></a>
+              <a><span className='user-status online'>Jhon Doe</span></a>
+              <a><span className='user-status online'>Jhon Doe</span></a>
+              <a><span className='user-status offline'>Jhon Doe</span></a>
+              <a><span className='user-status offline'>Jhon Doe</span></a>
             </div>
           </div>
         </div>
@@ -68,4 +55,4 @@ class Aside extends React.Component {
   }
 }
 
-module.exports = Aside;
+module.exports = Contact;

@@ -159,19 +159,19 @@ export function updateChat(username, data, time, newChat, socket) {
         } else{
           idAquienSeLoMando=newChat.user1;
         }
-        console.log('USERNAME',username);
+        // console.log('USERNAME',username);
         socket.emit('sendchat', idAquienSeLoMando, data, time, username);
 
-
         newChat.messages.push(response.data._id);  
-        console.log('AAA!-->',response.data);      
-        // updateChatForIncommingMessage(response.data.owner, response.data.data, response.data.time, response.data._id); 
+        // console.log('AAA!-->',response.data);      
+        // if(newChat.user1!==newChat.user1) {
+        // console.log('son iguales');
         const message = { '_id': response.data._id, 'owner': response.data.owner, 'content': response.data.content, 'time': response.data.time };
-        
         dispatch({
           type: UPDATE_MESSAGE,
           messages: message,
         });
+        // }
 
         axios.put(`${API_URL}/chats/${newChat._id}`,newChat)
         .then(response => {
@@ -189,9 +189,9 @@ export function updateChat(username, data, time, newChat, socket) {
 
 export function updateChatForIncommingMessage(username, data, time, id) {
   return (dispatch) => {
-    console.log(username, data, time, id);
+    // console.log(username, data, time, id);
     const message = { '_id': id, 'owner': username, 'content': data, 'time': time };
-    console.log('Message', message);
+    // console.log('Message', message);
     dispatch({
         type: UPDATE_MESSAGE,
         messages: message,

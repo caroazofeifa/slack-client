@@ -16,6 +16,8 @@ $marginCalc: calc((8.7vh - 30px)/2);
   //This doesnt work in mozilla
   // display: flex;
   // flex-direction: column-reverse;
+  // display: -webkit-flex; /* Safari */
+  // -webkit-flex-direction: row-reverse; /* Safari 6.1+ */
 }
 #style-1::-webkit-scrollbar-track
 {

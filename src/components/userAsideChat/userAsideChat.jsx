@@ -2,29 +2,37 @@ import React from 'react';
 import './userAsideChat.scss';
 
 const preload = '../src/images/';
+let stateOfChat = 'notselected';
 
 class User extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {      
+    this.state = {     
+
     };
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick(event) {
-    //TO DO: DESCONECTESE DEL SOCKET!!!
-    this.props.handleClick(event.target.id);
+    this.props.onClick(this.props.user._id,this.props.user.profile.firstName);
+    event.target.value='';
   }
   render() {
+    if (this.props.selected) {
+      stateOfChat= 'selected';
+    } else {
+      stateOfChat='notselected';
+    }   
     return (
-      <a key={ this.props.id } onClick={ this.handleClick }><span></span>
+      <a key={ this.props.user._id } onClick={ this.handleClick }><span></span>
       <span
-          className={`user-status ${this.props.stateOfChat} ${this.props.stateOfUser}`} 
-          id={ user._id } >
-          { this.props.firstName }
+      
+          className={`user-status ${stateOfChat} offline`} 
+          id={ this.props.user._id } >
+          { this.props.user.profile.firstName }
           </span>
       </a>               
     );
   }
 }
 
-module.exports = Aside;
+module.exports = User;

@@ -12,8 +12,8 @@ const messageReducer = (state, action) => {
   return Object.assign({}, state, { messages: action.messages });
 };
 const updateMessageReducer = (state, action) => {
-  console.log('STATE', state);
-  console.log('ACT.MESS', action.messages);
+  // console.log('STATE', state);
+  // console.log('ACT.MESS', action.messages);
   const newMessages = state.messages;
   newMessages.push(action.messages);
   return Object.assign({}, state, { messages: newMessages });

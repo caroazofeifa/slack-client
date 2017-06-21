@@ -35,8 +35,8 @@ class ChatContainer extends React.Component {
     //Socket
     socket = io.connect('http://localhost:3000');
     //Se registra con su id y su socket id en el register
-    console.log('token: ',token._id);
-    console.log('EMIT register: ',this.props.userData.userData._id);
+    // console.log('token: ',token._id);
+    // console.log('EMIT register: ',this.props.userData.userData._id);
     socket.emit('register',token._id);
 
     socket.on('updatechat', (username, data, time, id) => {

@@ -1,34 +1,21 @@
 import React from 'react';
-// import store from '../../redux/store';
 import './asideChat.scss';
 
 const preload = '../src/images/';
 
+const User = require('../userAsideChat/userAsideChat');
 
 class Aside extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      offline: 'offline',
-      online_selected: 'online_selected',
-      online_notselected: 'online_notselected',
-
-      stateOfUser: '',
-///////////////////////////////////
-      selected: 'selected',
-      notselected:'notselected',
-      
-      stateOfChat: 'notselected',
-
+      userSelected: '',
     };
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick(event) {
-    //TO DO: DESCONECTESE DEL SOCKET!!!
-    console.log()
-    this.props.startConversation(event.target.id);
-    this.setState({stateOfUser:this.state.selected});
-    this.setState({stateOfChat:this.state.notselected});
+  handleClick(info,user) {
+    this.setState({userSelected:user})
+    this.props.startConversation(info);
   }
   render() {
     
@@ -59,13 +46,12 @@ class Aside extends React.Component {
               { (this.props.allUsers.allUsers.length > 1 ?
                 this.props.allUsers.allUsers
                 .map((user) => (
-                  <a key={ user._id } onClick={ this.handleClick }><span></span>
-                    <span
-                      className={`user-status ${this.state.selected} ${this.state.online}`} 
-                      id={ user._id } >
-                        { user.profile.firstName }
-                      </span>
-                    </a>
+                  <User
+                    key={ user._id }
+                    user= {user}    
+                    onClick={ this.handleClick.bind(this) }
+                    selected={ this.state.userSelected==user.profile.firstName ? true : false }
+                  />
                   ))
               : <div />) }
             </div>

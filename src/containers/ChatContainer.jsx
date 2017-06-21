@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionUsers from '../redux/actions/index';
 import store from '../redux/store';
-import { SET_USER_DATA } from '../redux/actions/types';
+import { SET_USER_DATA, UPDATE_MESSAGE } from '../redux/actions/types';
 
 const ChatHome = require('../components/home/home');
 
@@ -34,8 +34,13 @@ class ChatContainer extends React.Component {
     }
     //Socket
     socket = io.connect('http://localhost:3000');
+    //Se registra con su id y su socket id en el register
+    console.log('token: ',token._id);
+    console.log('EMIT register: ',this.props.userData.userData._id);
+    socket.emit('register',token._id);
+
     socket.on('updatechat', (username, data, time, id) => {
-      console.log('esta updeiteando chat');
+      // console.log('esta updeiteando chat');
       this.updateChatIncommingMessage(username, data, time, id);
     });
     this.props.getUsers();
@@ -54,16 +59,17 @@ class ChatContainer extends React.Component {
     const h = today.getHours();
     const m = today.getMinutes();
     const finalTime = `${dd}/${mm}/${yyyy} ${h}:${m}`;
-    // console.log(this.props.userData.userData._id);
-    // console.log(messageI);
-    // console.log(finalTime);
+ 
     // console.log(this.props.chatInfo.chat);
     const chatUpdate = {'_id': this.props.chatInfo.chat._id, 'user1':this.props.chatInfo.chat.user1, 'user2':this.props.chatInfo.chat.user2, 'messages':this.props.chatInfo.chat.messages }
     this.props.updateChat(this.props.userData.userData._id, messageI, finalTime, chatUpdate, socket);
+    this.updateChatIncommingMessage(this.props.userData.userData._id, messageI, finalTime, chatUpdate);
+
+
   }
   updateChatIncommingMessage(username, data, time, id){
-    console.log('new message!');
-    console.log('Mensaje: ', username, data, time, id);
+    // console.log('new message!');
+    // console.log('Mensaje: ', username, data, time, id);
     this.props.updateChatForIncommingMessage(username, data, time, id);
   }
   render() {

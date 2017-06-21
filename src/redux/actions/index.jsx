@@ -5,15 +5,10 @@ import store from '../../redux/store';
 
 const API_URL = 'http://localhost:3000/api';
 
-export function setUserData(userData) {
-  console.log('SET', userData);
-}
-//Logs de user
 export function loginUser({ email, password }) {
   return (dispatch) => {
     axios.post(`${API_URL}/auth/login`, { email, password })
     .then(response => {
-      // store.dispatch({
       dispatch({
         type: SET_USER_DATA,
         userData: response.data.user,
@@ -45,12 +40,9 @@ export function getUsers() {
 }
 //get all the messages of a conversation
 export function getMessages() {
-  // const c =store.getState().chatInfo.chat.messages;
-  // console.log('GET MESSAGES CHAT-->',c);
   return (dispatch) => {
     axios.get(`${API_URL}/messages`)
     .then(response => {
-      // console.log('GET MESSAGES DB-->', response.data);
       dispatch({
         type: SET_MESSAGE,
         messages: response.data,
@@ -62,49 +54,61 @@ export function getMessages() {
   };
 }
 export function compareMessages() {
-  const messagesInChat = store.getState().chatInfo.chat.messages;
-  // console.log('CHAT-->',messagesInChat);
-  const messagesInDB = store.getState().chatInfo.messages;
-  // console.log('MESSAGES-->',messagesInDB);
-
-  const messagesFinal = [];
-  if (messagesInChat !== undefined) {
-    messagesInDB
-    .map((show) =>
-      messagesInChat
-      .map((show2) =>
-        (show._id === show2)
-        ? messagesFinal.push(show)
-        : null,
-    ));
+  // console.log('inCompareMessages')
+  if(store.getState().chatInfo.chat!= undefined){
+    const messagesInChat = store.getState().chatInfo.chat.messages;
+    // console.log('messagesInChat', messagesInChat);
+    const messagesInDB = store.getState().chatInfo.messages;
+    // console.log('messagesInDB', messagesInDB);
+    const messagesFinal = [];
+    if (messagesInChat !== undefined) {
+      messagesInDB
+      .map((show) =>
+        messagesInChat
+        .map((show2) =>
+          (show._id === show2)
+          ? messagesFinal.push(show)
+          : null,
+      ));
+    }
+    store.dispatch({
+      type: SET_MESSAGE,
+      messages: messagesFinal,
+    });
+  } else{
+    store.dispatch({
+      type: SET_MESSAGE,
+      messages: [],
+    });
   }
-  // console.log('MESSAGES FINAL-->',messagesFinal);
-  store.dispatch({
-    type: SET_MESSAGE,
-    messages: messagesFinal,
-  });
 }
-//get all the chats of a conversation
 export function getChats(idOther, idMine) {
   // console.log('GET CHATS',idOther, idMine);
   return (dispatch) => {
     Promise.all([
       axios.get(`${API_URL}/chats`)
       .then(response => {
-        //dispatch({type: 'SET_CHAT',chat: {},})
+        let countEqualChats =0;
+        // console.log(countEqualChats);                
+        //console.log(response.data);
         response.data
         .map((show) =>
           ((show.user1 === idOther && show.user2 === idMine) || (show.user2 === idOther && show.user1 === idMine))
-          ? dispatch({
-            type: SET_CHAT,
-            chat: show,
-          })
-          : dispatch({ type: SET_CHAT, chat: {} }),
-        );
+          ? 
+            dispatch({
+              type: SET_CHAT,
+              chat: show,
+            },countEqualChats++
+            )
+          : null
+        );  
+        if(countEqualChats===0){
+          createChat(idOther,idMine);
+        }     
       }),
       axios.get(`${API_URL}/messages`)
       .then(response => {
-        // console.log('GET MESSAGES DB-->', response.data);
+        // console.log('Messages!!:', response.data);
         dispatch({
           type: SET_MESSAGE,
           messages: response.data,
@@ -119,17 +123,46 @@ export function getChats(idOther, idMine) {
   };
 }
 
-export function updateChat(username, data, time, newChat,socket) { 
+export function createChat(user1,user2) { 
+  const chat = { 'user1': user1, 'user2': user2, 'messages': [] };
+  axios.post(`${API_URL}/chats`, chat)
+  .then(response => {
+    // console.log(response.data);
+    store.dispatch({
+      type: SET_CHAT,
+      chat: response.data,
+    });
+    compareMessages();
+  })
+  .catch((error) => {
+    console.log('Error createChat: ', error);
+  });
+}
+
+export function updateChat(username, data, time, newChat, socket) { 
+  console.log('EL NEW CHAT CON EL ID PORFAVOR!!',newChat);
   return (dispatch) => {
     const message = { 'owner': username, 'content': data, 'time': time };
-    // console.log('Message', message);
-    // console.log('Chat', newChat);
     Promise.all([      
-      //saves the message, get the id to save in the chat.
       axios.post(`${API_URL}/messages`, message)
       .then(response => {
-        console.log('ID DEL NUEVO MENSAJE: ', response.data._id);
-        socket.emit('sendchat', data, time,response.data._id);
+        // console.log('ID DEL NUEVO MENSAJE: ', response.data._id);
+        // io.to(socket.id).emit("event", data);
+        //socket.emit('sendchat', data, time,response.data._id);
+        // console.log(store.getState().userData.userData._id);
+        // console.log('U1',newChat.user1)
+        // console.log('U2',newChat.user2);
+        // console.log('response.data._id',response.data._id);
+        let idAquienSeLoMando ='something';
+        if(store.getState().userData.userData._id===newChat.user1){
+          idAquienSeLoMando=newChat.user2;
+        } else{
+          idAquienSeLoMando=newChat.user1;
+        }
+        console.log('SEND CHAT idalqeselomando',idAquienSeLoMando);
+        socket.emit('sendchat', idAquienSeLoMando, data, time, response.data._id);
+
+
         newChat.messages.push(response.data._id);        
         axios.put(`${API_URL}/chats/${newChat._id}`,newChat)
         .then(response => {
@@ -140,7 +173,7 @@ export function updateChat(username, data, time, newChat,socket) {
         })
       }),      
     ]).then(() => {
-      console.log('after promise')
+      // console.log('after promise')
     })
     .catch((error) => {
       console.log('Error updateChat: ', error);
@@ -151,7 +184,7 @@ export function updateChat(username, data, time, newChat,socket) {
 export function updateChatForIncommingMessage(username, data, time, id) {
   return (dispatch) => {
     const message = { '_id': id, 'owner': username, 'content': data, 'time': time };
-    console.log('Message', message);
+    // console.log('Message', message);
     dispatch({
         type: UPDATE_MESSAGE,
         messages: message,

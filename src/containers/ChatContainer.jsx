@@ -62,8 +62,8 @@ class ChatContainer extends React.Component {
  
     // console.log(this.props.chatInfo.chat);
     const chatUpdate = {'_id': this.props.chatInfo.chat._id, 'user1':this.props.chatInfo.chat.user1, 'user2':this.props.chatInfo.chat.user2, 'messages':this.props.chatInfo.chat.messages }
-    this.props.updateChat(this.props.userData.userData._id, messageI, finalTime, chatUpdate, socket);
-    this.updateChatIncommingMessage(this.props.userData.userData._id, messageI, finalTime, chatUpdate);
+    this.props.updateChat(this.props.userData.userData.firstName, messageI, finalTime, chatUpdate, socket);
+    // this.updateChatIncommingMessage(this.props.userData.userData.firstName, messageI, finalTime, this.props.userData.userData._id);
 
 
   }

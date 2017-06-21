@@ -14,7 +14,7 @@ class Message extends React.Component {
       <div>
         <div className='row message'>
           <div className='col-md-2'>
-            <img className='imgMessage' src={ `${preload}girl2.png` } />
+            <img className='imgMessage' src={ `${preload}boy3.png` } />
           </div>
           <div className='col-md-10'>
             <div className='messageTitle'>

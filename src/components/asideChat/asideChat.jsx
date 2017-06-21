@@ -4,25 +4,41 @@ import './asideChat.scss';
 
 const preload = '../src/images/';
 
+
 class Aside extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      offline: 'offline',
+      online_selected: 'online_selected',
+      online_notselected: 'online_notselected',
+
+      stateOfUser: '',
+///////////////////////////////////
+      selected: 'selected',
+      notselected:'notselected',
+      
+      stateOfChat: 'notselected',
+
     };
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick(event) {
     //TO DO: DESCONECTESE DEL SOCKET!!!
+    console.log()
     this.props.startConversation(event.target.id);
+    this.setState({stateOfUser:this.state.selected});
+    this.setState({stateOfChat:this.state.notselected});
   }
   render() {
+    
     return (
       <div className='aside col-md-2'>
       <div className='row'>
         <header className='col-md-12 header'>
           <div className='header-content aside-margin-left'>
              <span className='white-text'>Konrad Group</span>
-             <span className='user-status online'>{ `${this.props.userData.userData.firstName} ${this.props.userData.userData.lastName}` }</span>
+             <span className='user-status online_notselected'>{ `${this.props.userData.userData.firstName} ${this.props.userData.userData.lastName}` }</span>
           </div>
         </header>
         <div className='col-md-12 body'>
@@ -43,7 +59,13 @@ class Aside extends React.Component {
               { (this.props.allUsers.allUsers.length > 1 ?
                 this.props.allUsers.allUsers
                 .map((user) => (
-                  <a key={ user._id } onClick={ this.handleClick }><span className='user-status online' id={ user._id } >{ user.profile.firstName }</span></a>
+                  <a key={ user._id } onClick={ this.handleClick }><span></span>
+                    <span
+                      className={`user-status ${this.state.selected} ${this.state.online}`} 
+                      id={ user._id } >
+                        { user.profile.firstName }
+                      </span>
+                    </a>
                   ))
               : <div />) }
             </div>

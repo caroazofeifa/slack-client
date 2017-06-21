@@ -19,9 +19,6 @@ $gray-font: #9fa3a7;
 $brand-green: #20a766;
 
 //height variables
-$full-height: 100vh;
-$height-72: calc(100vh - 72px);
-$height-144: calc(100vh - 144px);
 
 .aside{
   //height: $full-height;
@@ -120,6 +117,8 @@ $height-144: calc(100vh - 144px);
     font-size: 15.251px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     color: rgb(150, 136, 155);
+    // background-color: #4C9689;
+    // color:white;
     line-height: 1.705;
     text-align: left;
     // color: $purple-font-light;
@@ -137,7 +136,22 @@ $height-144: calc(100vh - 144px);
       width: 6px;
     }
   }
-  .online::before{
+  
+  .notselected{
+    color: rgb(150, 136, 155);
+    background-color: transparent;
+    border-radius: 8px;
+  }
+  
+  .selected{
+    background-color: #4C9689;
+    color:white;
+    border-radius: 8px;
+  }
+  .online_selected::before{
+    background: white;
+  }
+  .online_notselected::before{
     background: $brand-green;
   }
   .offline::before{
@@ -189,3 +203,4 @@ $height-144: calc(100vh - 144px);
 	border-radius: 10px;
 	background-color: #AB9BAA;
 }
+

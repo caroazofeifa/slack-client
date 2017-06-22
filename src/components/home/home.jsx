@@ -21,6 +21,7 @@ class Menu extends React.Component {
           startConversationChannel={ this.props.startConversationChannel }
           allUsers={ this.props.allUsers }
           userData={ this.props.userData }
+          usersConnected={ this.props.usersConnected }
         />
         <NavChat 
           chatInfo={ this.props.chatInfo }

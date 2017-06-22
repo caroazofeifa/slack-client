@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Redirect } from 'react-router';
+// import { Redirect } from 'react-router';
 
 // import App from '../../containers/AppContainer';
 // import NotFoundPagse from './components/pages/not-found-page';
@@ -13,8 +13,8 @@ import Login from '../../containers/LoginContainer';
 const createRouter = () => (
   <Router>
     <div>
-      <Route exact path='/' render={ () => (<Redirect to='/login' />) } />
-      <Route path='/login' component={ Login } />
+      {/*<Route exact path='/' render={ () => (<Redirect to='/login' />) } />*/}
+      <Route exact path='/' component={ Login } />
       <Route path='/messages' component={ HomePage } />
       {/*<Route path='/app' component={ App } />*/}
      </div>

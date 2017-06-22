@@ -64,6 +64,7 @@ class Aside extends React.Component {
                     user= {user}    
                     onClick={ this.handleClick.bind(this) }
                     selected={ this.state.userSelected==user.profile.firstName ? true : false }
+                    usersConnected={ this.props.usersConnected }
                   />
                   ))
               : <div />) }

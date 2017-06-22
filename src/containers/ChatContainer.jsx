@@ -60,13 +60,14 @@ class ChatContainer extends React.Component {
     const yyyy = today.getFullYear();
     const h = today.getHours();
     const m = today.getMinutes();
-    const finalTime = `${dd}/${mm}/${yyyy} ${h}:${m}`;
- 
+    //const finalTime = `${dd}/${mm}/${yyyy} ${h}:${m}`;
+    const finalTime = `${h}:${m}`;
     // console.log(this.props.chatInfo.chat);
-    const chatUpdate = {'_id': this.props.chatInfo.chat._id, 'user1':this.props.chatInfo.chat.user1, 'user2':this.props.chatInfo.chat.user2, 'messages':this.props.chatInfo.chat.messages }
-    this.props.updateChat(this.props.userData.userData.firstName, messageI, finalTime, chatUpdate, socket);
-    // this.updateChatIncommingMessage(this.props.userData.userData.firstName, messageI, finalTime, this.props.userData.userData._id);
-
+    if(this.props.chatInfo!= undefined){
+      const chatUpdate = {'_id': this.props.chatInfo.chat._id, 'user1':this.props.chatInfo.chat.user1, 'user2':this.props.chatInfo.chat.user2, 'messages':this.props.chatInfo.chat.messages }
+      this.props.updateChat(this.props.userData.userData.firstName, messageI, finalTime, chatUpdate, socket);
+      // this.updateChatIncommingMessage(this.props.userData.userData.firstName, messageI, finalTime, this.props.userData.userData._id);
+    }
 
   }
   updateChatIncommingMessage(username, data, time, id){

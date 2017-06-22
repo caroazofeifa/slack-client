@@ -16,9 +16,11 @@ class Nav extends React.Component {
                   <div className='title'>
                     <h3 className='titleNavBarLeft'>
                       {(this.props.chatInfo!=undefined && this.props.userData !=undefined && this.props.allUsers!=undefined) 
-                        ? (this.props.chatInfo.chat.user1 == this.props.userData._id)
-                          ? this.props.allUsers.allUsers.find( (element) => ( element._id === this.props.chatInfo.chat.user2 )).profile.firstName 
-                          : this.props.allUsers.allUsers.find( (element) => ( element._id === this.props.chatInfo.chat.user1 )).profile.firstName 
+                        ? (this.props.chatInfo.chat!= undefined)
+                          ? (this.props.chatInfo.chat.user1 == this.props.userData._id)
+                            ? this.props.allUsers.allUsers.find( (element) => ( element._id === this.props.chatInfo.chat.user2 )).profile.firstName 
+                            : this.props.allUsers.allUsers.find( (element) => ( element._id === this.props.chatInfo.chat.user1 )).profile.firstName 
+                          : ''
                         : ''
                       }
                     </h3>

@@ -4,6 +4,7 @@ import User from '../userAsideChat/userAsideChat';
 import Channel from '../channelAsideChat/channelAsideChat';
 
 const preload = '../src/images/';
+const nameOfTheChannel ='general';
 
 // const User = require('../userAsideChat/userAsideChat');
 // const Channel = require('../channelAsideChat/channelAsideChat');
@@ -16,24 +17,13 @@ class Aside extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick(info,user) {
-    console.log('INFO',info, 'USER',user);
     this.setState({userSelected:user})//name user
     this.props.startConversation(info);//id user
   }
-  // image(){
-  //   const myId = this.props.userData.userData._id;
-  //   const user1 = this.props.chatInfo.chat.user1;
-  //   const user2 = this.props.chatInfo.chat.user2;
-  //   const userImage =
-  //   this.props.allUsers.allUsers
-  //   .map((user) => (
-  //     if(user._id ==){
-
-  //     }   
-      
-  //   ))
-  // }
-
+  handleClickChannel(channelName) {
+    this.setState({userSelected:channelName})//name channel
+    this.props.startConversationChannel(channelName);//id channel
+  }
   render() {
     
     return (
@@ -55,8 +45,8 @@ class Aside extends React.Component {
                 <Channel
                     //key={ user._id }
                     //user= {user}    
-                    onClick={ this.handleClick.bind(this) }
-                    selected={ this.state.userSelected=='general' ? true : false }
+                    onClick={ this.handleClickChannel.bind(this) }
+                    selected={ this.state.userSelected==nameOfTheChannel ? true : false }
                   />
               </div>
             </div>

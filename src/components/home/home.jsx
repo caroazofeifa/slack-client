@@ -18,6 +18,7 @@ class Menu extends React.Component {
       <div className='row home'>
         <Aside
           startConversation={ this.props.startConversation }
+          startConversationChannel={ this.props.startConversationChannel }
           allUsers={ this.props.allUsers }
           userData={ this.props.userData }
         />

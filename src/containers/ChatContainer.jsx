@@ -16,10 +16,12 @@ class ChatContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      actual:'channel',
     };
     this.startConversation = this.startConversation.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.updateChatIncommingMessage = this.updateChatIncommingMessage.bind(this);
+    this.startConversationChannel = this.startConversationChannel.bind(this);
   }
   componentWillMount() {
     //Cookies
@@ -35,22 +37,66 @@ class ChatContainer extends React.Component {
     //Socket
     socket = io.connect('http://localhost:3000');
     //Se registra con su id y su socket id en el register
-    // console.log('token: ',token._id);
-    // console.log('EMIT register: ',this.props.userData.userData._id);
     socket.emit('register',token._id);
-
-    socket.on('updatechat', (username, data, time, id) => {
-      // console.log('esta updeiteando chat');
-      this.updateChatIncommingMessage(username, data, time, id);
+    
+    //io.to(connections[idMessageFor]).emit('updatechat', idMessageFor, data, time,idMessageFrom, socket.username);      
+    socket.on('updatechat', (idMessageFor, data, time, idMessageFrom,username,idMessage) => {
+        console.log('idMessageFor',idMessageFor);//THIS IS WHAT I NEED--
+        console.log('data',data);//THIS IS WHAT I NEED
+        console.log('time',time);//THIS IS WHAT I NEED
+        console.log('idMessageFrom', idMessageFrom);//THIS IS WHAT I NEED
+        console.log('username', username);//THIS IS WHAT I NEED
+        console.log('idMessage', idMessage);//THIS IS WHAT I NEED
+       if(this.props.chatInfo!=undefined) {
+        console.log('CHAT INFO');
+        if(this.state.actual==='channel' &&this.props.chatInfo.channel!=undefined){
+          console.log('CHANNEL');
+          //(this.props.chatInfo.chat.user1==idMessageFrom || this.props.chatInfo.chat.user2==idMessageFrom) ?
+          // this.props.updateChannelForIncommingMessage(idMessageFor, data, time, idMessageFrom,username,idMessage);
+          ///: null
+        }
+        else if(this.state.actual==='chat' &&this.props.chatInfo.chat!=undefined){
+          console.log('CHAT');
+          (this.props.chatInfo.chat.user1==idMessageFrom || this.props.chatInfo.chat.user2==idMessageFrom) ?
+          this.props.updateChatForIncommingMessage(idMessageFor, data, time, idMessageFrom,username,idMessage)
+          : null
+        }
+      }
+    });
+      socket.on('updatechannel', (idMessageFor, data, time, idMessageFrom,username,idMessage) => {
+        console.log('idMessageFor',idMessageFor);//THIS IS WHAT I NEED--
+        console.log('data',data);//THIS IS WHAT I NEED
+        console.log('time',time);//THIS IS WHAT I NEED
+        console.log('idMessageFrom', idMessageFrom);//THIS IS WHAT I NEED
+        console.log('username', username);//THIS IS WHAT I NEED
+        console.log('idMessage', idMessage);//THIS IS WHAT I NEED
+       if(this.props.chatInfo!=undefined) {
+        console.log('CHAT INFO');
+        if(this.state.actual==='channel' &&this.props.chatInfo.channel!=undefined){
+          console.log('CHANNEL');
+          //(this.props.chatInfo.chat.user1==idMessageFrom || this.props.chatInfo.chat.user2==idMessageFrom) ?
+          this.props.updateChannelForIncommingMessage(idMessageFor, data, time, idMessageFrom,username,idMessage);
+          ///: null
+        }
+        else if(this.state.actual==='chat' &&this.props.chatInfo.chat!=undefined){
+          console.log('CHAT');
+          // (this.props.chatInfo.chat.user1==idMessageFrom || this.props.chatInfo.chat.user2==idMessageFrom) ?
+          // this.props.updateChatForIncommingMessage(idMessageFor, data, time, idMessageFrom,username,idMessage)
+          // : null
+        }
+      }
     });
     this.props.getUsers();
     
-    // console.log(this.props.allUsers);
   }
   startConversation(id) {
-    // console.log('Start conversation:' + id + ' & ' +this.props.userData.userData._id)
+    this.setState({actual:'chat'});
     socket.emit('adduser', id);
     this.props.getChats(id, this.props.userData.userData._id);
+  }
+  startConversationChannel(channelName){//nameChannel
+    this.setState({actual:'channel'});
+    this.props.getChannels(channelName);
   }
   sendMessage(messageI){
     const today = new Date();
@@ -62,24 +108,40 @@ class ChatContainer extends React.Component {
     const m = today.getMinutes();
     //const finalTime = `${dd}/${mm}/${yyyy} ${h}:${m}`;
     const finalTime = `${h}:${m}`;
-    // console.log(this.props.chatInfo.chat);
+  
     if(this.props.chatInfo!= undefined){
-      const chatUpdate = {'_id': this.props.chatInfo.chat._id, 'user1':this.props.chatInfo.chat.user1, 'user2':this.props.chatInfo.chat.user2, 'messages':this.props.chatInfo.chat.messages }
-      this.props.updateChat(this.props.userData.userData.firstName, messageI, finalTime, chatUpdate, socket);
-      // this.updateChatIncommingMessage(this.props.userData.userData.firstName, messageI, finalTime, this.props.userData.userData._id);
+  
+      if(this.state.actual=='chat'){
+        if(this.props.chatInfo.chat!=undefined){
+  
+          const chatUpdate = {'_id': this.props.chatInfo.chat._id, 'user1':this.props.chatInfo.chat.user1, 'user2':this.props.chatInfo.chat.user2, 'messages':this.props.chatInfo.chat.messages }
+          this.props.updateChat(this.props.userData.userData.firstName, messageI, finalTime, chatUpdate, socket);
+          // this.updateChatIncommingMessage(this.props.userData.userData.firstName, messageI, finalTime, this.props.userData.userData._id);
+        } 
+      } else{
+        if (this.state.actual=='channel'){
+            if(this.props.chatInfo.channel!=undefined){
+              const channelUpdate = {'_id': this.props.chatInfo.channel._id, 'name':this.props.chatInfo.channel.name, 'messages':this.props.chatInfo.channel.messages }
+              this.props.updateChannel(this.props.userData.userData.firstName, messageI, finalTime, channelUpdate, socket);
+          }
+        }       
+      }
     }
-
   }
-  updateChatIncommingMessage(username, data, time, id){
-    // console.log('new message!');
-    // console.log('Mensaje: ', username, data, time, id);
-    this.props.updateChatForIncommingMessage(username, data, time, id);
+
+  
+  updateChatIncommingMessage(idMessageFor, data, time, idMessageFrom,username,idMessage){
+  
+  }
+  updateChannelIncommingMessage(idMessageFor, data, time, idMessageFrom,username,idMessage){
+  
   }
   render() {
     return (
       <div className='container-fluid'>
           <ChatHome
             startConversation={ this.startConversation }
+            startConversationChannel={ this.startConversationChannel }
             chatInfo={ this.props.chatInfo }
             sendMessage={ this.sendMessage }
             allUsers={ this.props.allUsers }

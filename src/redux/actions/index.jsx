@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-import { SET_USER_DATA, SET_CHAT, SET_MESSAGE, UPDATE_MESSAGE } from './types';
+import { SET_USER_DATA, SET_CHAT, SET_MESSAGE, UPDATE_MESSAGE, GET_CHANNEL, SET_CHANNEL } from './types';
 import store from '../../redux/store';
 
 const API_URL = 'http://localhost:3000/api';
@@ -25,11 +25,11 @@ export function loginUser({ email, password }) {
 
 //get all the usera from the DB
 export function getUsers() {
-  console.log('GETTING USERS');
+  // console.log('GETTING USERS');
   return (dispatch) => {
     axios.get(`${API_URL}/users`)
     .then(response => {
-      console.log('RESPONSE',response.data);
+      // console.log('RESPONSE',response.data);
       dispatch({
         type: 'SET_ALL_USERS',
         allUsers: response.data,
@@ -55,13 +55,37 @@ export function getMessages() {
     });
   };
 }
+export function compareMessagesChannel() {
+  if(store.getState().chatInfo.channel!= undefined){
+    const messagesInChannel = store.getState().chatInfo.channel.messages;
+    const messagesInDB = store.getState().chatInfo.messages;
+    const messagesFinal = [];
+    if (messagesInChannel !== undefined) {
+      messagesInDB
+      .map((show) =>
+        messagesInChannel
+        .map((show2) =>
+          (show._id === show2)
+          ? messagesFinal.push(show)
+          : null,
+      ));
+    }
+    store.dispatch({
+      type: SET_MESSAGE,
+      messages: messagesFinal,
+    });
+  } else{
+    console.log('else');
+    store.dispatch({
+      type: SET_MESSAGE,
+      messages: [],
+    });
+  }
+}
 export function compareMessages() {
-  // console.log('inCompareMessages')
   if(store.getState().chatInfo.chat!= undefined){
     const messagesInChat = store.getState().chatInfo.chat.messages;
-    // console.log('messagesInChat', messagesInChat);
     const messagesInDB = store.getState().chatInfo.messages;
-    // console.log('messagesInDB', messagesInDB);
     const messagesFinal = [];
     if (messagesInChat !== undefined) {
       messagesInDB
@@ -85,14 +109,12 @@ export function compareMessages() {
   }
 }
 export function getChats(idOther, idMine) {
-  // console.log('GET CHATS',idOther, idMine);
   return (dispatch) => {
     Promise.all([
       axios.get(`${API_URL}/chats`)
       .then(response => {
         let countEqualChats =0;
-        // console.log(countEqualChats);                
-        //console.log(response.data);
+    
         response.data
         .map((show) =>
           ((show.user1 === idOther && show.user2 === idMine) || (show.user2 === idOther && show.user1 === idMine))
@@ -110,7 +132,6 @@ export function getChats(idOther, idMine) {
       }),
       axios.get(`${API_URL}/messages`)
       .then(response => {
-        // console.log('Messages!!:', response.data);
         dispatch({
           type: SET_MESSAGE,
           messages: response.data,
@@ -124,7 +145,56 @@ export function getChats(idOther, idMine) {
     });
   };
 }
-
+export function getChannels(nameChannel) {
+  return (dispatch) => {
+    Promise.all([
+      axios.get(`${API_URL}/channels`)
+      .then(response => {
+        let countEqualChats =0;
+        response.data
+        .map((show) =>
+          (show.name === nameChannel )
+          ? 
+            dispatch({
+              type: SET_CHANNEL,
+              channel: show,
+            },countEqualChats++,
+            )
+          : null
+        );  
+        if(countEqualChats===0){
+          createChannel(nameChannel);
+        }     
+      }),
+      axios.get(`${API_URL}/messages`)
+      .then(response => {
+        dispatch({
+          type: SET_MESSAGE,
+          messages: response.data,
+        });
+      }),
+    ]).then(() => {
+      compareMessagesChannel();
+    })
+    .catch((error) => {
+      console.log('Error getChannels: ', error);
+    });
+  };
+}
+export function createChannel(nameChannel) { 
+  const chat = { 'name': nameChannel, 'messages': [] };
+  axios.post(`${API_URL}/channels`, chat)
+  .then(response => {
+    store.dispatch({
+      type: SET_CHANNEL,
+      chat: response.data,
+    });
+    compareMessagesChannel();
+  })
+  .catch((error) => {
+    console.log('Error createChat: ', error);
+  });
+}
 export function createChat(user1,user2) { 
   const chat = { 'user1': user1, 'user2': user2, 'messages': [] };
   axios.post(`${API_URL}/chats`, chat)
@@ -142,39 +212,36 @@ export function createChat(user1,user2) {
 }
 
 export function updateChat(username, data, time, newChat, socket) { 
-  console.log('EL NEW CHAT CON EL ID PORFAVOR!!',newChat);
   return (dispatch) => {
     const message = { 'owner': username, 'content': data, 'time': time };
     Promise.all([      
       axios.post(`${API_URL}/messages`, message)
-      .then(response => {
-        // console.log('ID DEL NUEVO MENSAJE: ', response.data._id);
-        // io.to(socket.id).emit("event", data);
-        //socket.emit('sendchat', data, time,response.data._id);
-        // console.log(store.getState().userData.userData._id);
-        // console.log('U1',newChat.user1)
-        // console.log('U2',newChat.user2);
-        // console.log('response.data._id',response.data._id);
-        let idAquienSeLoMando ='something';
+      .then(response => {        
+        let idMessageFor ='something';
         if(store.getState().userData.userData._id===newChat.user1){
-          idAquienSeLoMando=newChat.user2;
+          idMessageFor=newChat.user2;
         } else{
-          idAquienSeLoMando=newChat.user1;
+          idMessageFor=newChat.user1;
         }
-        // console.log('USERNAME',username);
-        socket.emit('sendchat', idAquienSeLoMando, data, time, username);
-
-        newChat.messages.push(response.data._id);  
-        // console.log('AAA!-->',response.data);      
-        // if(newChat.user1!==newChat.user1) {
-        // console.log('son iguales');
+        let idMessageFrom=store.getState().userData.userData._id;
+        let idMessage =response.data._id;
+        
+        console.log('ENVIO2');
+        console.log('idMessageFor',idMessageFor);//THIS IS WHAT I NEED--
+        console.log('data',data);//THIS IS WHAT I NEED
+        console.log('time',time);//THIS IS WHAT I NEED
+        console.log('idMessageFrom', idMessageFrom);//THIS IS WHAT I NEED
+        console.log('username', username);//THIS IS WHAT I NEED
+        console.log('idMessage', idMessage);//THIS IS WHAT I NEED
+        
+        socket.emit('sendchat', idMessageFor, data, time, idMessageFrom,username,idMessage);
+       
+        newChat.messages.push(response.data._id);         
         const message = { '_id': response.data._id, 'owner': response.data.owner, 'content': response.data.content, 'time': response.data.time };
         dispatch({
           type: UPDATE_MESSAGE,
           messages: message,
-        });
-        // }
-
+        });        
         axios.put(`${API_URL}/chats/${newChat._id}`,newChat)
         .then(response => {
           // console.log('Vamo a hacer dispatch: :)',response);
@@ -189,11 +256,81 @@ export function updateChat(username, data, time, newChat, socket) {
   };
 }
 
-export function updateChatForIncommingMessage(username, data, time, id) {
+export function updateChannel(username, data, time, newChannel, socket) { 
   return (dispatch) => {
-    // console.log(username, data, time, id);
-    const message = { '_id': id, 'owner': username, 'content': data, 'time': time };
-    // console.log('Message', message);
+    const message = { 'owner': username, 'content': data, 'time': time };
+    Promise.all([      
+      axios.post(`${API_URL}/messages`, message)
+      .then(response => {
+
+        let idMessageFor ='general';
+        // if(store.getState().userData.userData._id===newChat.user1){
+        //   idMessageFor=newChat.user2;
+        // } else{
+        //   idMessageFor=newChat.user1;
+        // }
+        let idMessageFrom='general';
+        let idMessage =response.data._id;
+        
+        console.log('ENVIO1');
+        console.log('idMessageFor',idMessageFor);//THIS IS WHAT I NEED--
+        console.log('data',data);//THIS IS WHAT I NEED
+        console.log('time',time);//THIS IS WHAT I NEED
+        console.log('idMessageFrom', idMessageFrom);//THIS IS WHAT I NEED
+        console.log('username', username);//THIS IS WHAT I NEED
+        console.log('idMessage', idMessage);//THIS IS WHAT I NEED
+        
+        // socket.emit('sendchat', idMessageFor, data, time, idMessageFrom,username,idMessage);      
+
+        socket.emit('sendchannel', idMessageFor, data, time, idMessageFrom,username,idMessage);
+        newChannel.messages.push(response.data._id);         
+        const message = { '_id': response.data._id, 'owner': response.data.owner, 'content': response.data.content, 'time': response.data.time };
+        dispatch({
+          type: UPDATE_MESSAGE,
+          messages: message,
+        });        
+        axios.put(`${API_URL}/channels/${newChannel._id}`,newChannel)
+        .then(response => {
+          // console.log('Vamo a hacer dispatch: :)',response);
+        })
+      }),      
+    ]).then(() => {
+      // console.log('after promise')
+    })
+    .catch((error) => {
+      console.log('Error updateChannel: ', error);
+    });
+  };
+}
+
+export function updateChatForIncommingMessage(idMessageFor, data, time,idMessageFrom, username,idMessage) {
+  console.log('DOING UPDATE');
+  console.log('idMessageFor',idMessageFor);//THIS IS WHAT I NEED--
+  console.log('data',data);//THIS IS WHAT I NEED
+  console.log('time',time);//THIS IS WHAT I NEED
+  console.log('idMessageFrom', idMessageFrom);//THIS IS WHAT I NEED
+  console.log('username', username);//THIS IS WHAT I NEED
+  console.log('idMessage', idMessage);//THIS IS WHAT I NEED
+  return (dispatch) => {
+    const message = { '_id': idMessage, 'owner': username, 'content': data, 'time': time };
+    console.log(message);
+    dispatch({
+        type: UPDATE_MESSAGE,
+        messages: message,
+      });
+  };
+}
+export function updateChannelForIncommingMessage(idMessageFor, data, time,idMessageFrom, username,idMessage) {
+  console.log('DOING UPDATE');
+  console.log('idMessageFor',idMessageFor);//THIS IS WHAT I NEED--
+  console.log('data',data);//THIS IS WHAT I NEED
+  console.log('time',time);//THIS IS WHAT I NEED
+  console.log('idMessageFrom', idMessageFrom);//THIS IS WHAT I NEED
+  console.log('username', username);//THIS IS WHAT I NEED
+  console.log('idMessage', idMessage);//THIS IS WHAT I NEED
+  return (dispatch) => {
+    const message = { '_id': idMessage, 'owner': username, 'content': data, 'time': time };
+    console.log(message);
     dispatch({
         type: UPDATE_MESSAGE,
         messages: message,

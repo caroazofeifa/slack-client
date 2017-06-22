@@ -13,7 +13,7 @@ class Channel extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick(event) {
-    this.props.onClick(nameOfTheChannel,nameOfTheChannel);
+    this.props.onClick(nameOfTheChannel);
   }
   render() {
     if (this.props.selected) {

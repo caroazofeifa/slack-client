@@ -18,3 +18,6 @@ export const SET_MESSAGE = 'SET_MESSAGE';
 
 export const UPDATE_CHAT ='UPDATE_CHAT';
 export const UPDATE_MESSAGE ='UPDATE_MESSAGE';
+
+export const GET_CHANNEL = 'GET_CHANNEL';
+export const SET_CHANNEL = 'SET_CHANNEL';

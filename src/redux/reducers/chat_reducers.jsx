@@ -1,8 +1,9 @@
-import { GET_CHAT, SET_CHAT, GET_MESSAGE, SET_MESSAGE, UPDATE_MESSAGE } from '../actions/types';
+import { GET_CHAT, SET_CHAT, GET_MESSAGE, SET_MESSAGE, UPDATE_MESSAGE, GET_CHANNEL, SET_CHANNEL } from '../actions/types';
 
 const DEFAULT_STATE = {
   chat: [],
   messages: [],
+  channel: [],
 };
 
 const chatReducer = (state, action) => {
@@ -18,7 +19,9 @@ const updateMessageReducer = (state, action) => {
   newMessages.push(action.messages);
   return Object.assign({}, state, { messages: newMessages });
 };
-
+const channelReducer = (state, action) => {
+  return Object.assign({}, state, { channel: action.channel });
+};
 
 export default function (state = DEFAULT_STATE, action) {
   switch (action.type) {
@@ -26,6 +29,10 @@ export default function (state = DEFAULT_STATE, action) {
       return state.chat;
     case SET_CHAT:
       return chatReducer(state, action);
+     case GET_CHANNEL:
+      return state.chat;
+    case SET_CHANNEL:
+      return channelReducer(state, action);
     case GET_MESSAGE:
       return state.messages;
     case SET_MESSAGE:

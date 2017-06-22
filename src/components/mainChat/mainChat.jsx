@@ -1,5 +1,5 @@
 import React from 'react';
-// import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import './mainChat.scss';
 
 const preload = '../../src/images/';
@@ -11,7 +11,14 @@ class Chat extends React.Component {
     super(props);
     this.state = {
     };
-    this.handleKeyPress =this.handleKeyPress.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.scrollToBottom = this.scrollToBottom.bind(this);
+  }
+  componentDidMount() {
+     this.scrollToBottom();
+  }
+  componentDidUpdate() {
+      this.scrollToBottom();
   }
   handleKeyPress(event) {
     if (event.key === 'Enter') {
@@ -20,12 +27,18 @@ class Chat extends React.Component {
       event.currentTarget.value ='';
     }
   }
+  scrollToBottom() {
+    const messagesContainer = ReactDOM.findDOMNode(this.messagesContainer);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  };
   render() {
     return (
       <div className='col-md-7 '>
         <main className='main__position'>
           <div className='row'>
-            <div className='col-md-12 main main__center mainChat scrollbar' id='style-1'>
+            <div 
+              ref={(el) => { this.messagesContainer = el; }}
+              className='col-md-12 main main__center mainChat scrollbar' id='style-1'>
               <Messages
                 chatInfo={ this.props.chatInfo }
               />

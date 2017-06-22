@@ -21,7 +21,11 @@ class Menu extends React.Component {
           allUsers={ this.props.allUsers }
           userData={ this.props.userData }
         />
-        <NavChat />
+        <NavChat 
+          chatInfo={ this.props.chatInfo }
+          allUsers={ this.props.allUsers }
+          userData={ this.props.userData }
+        />
         <MainChat
           chatInfo={ this.props.chatInfo }
           sendMessage={ this.props.sendMessage }

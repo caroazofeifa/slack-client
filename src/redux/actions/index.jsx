@@ -25,9 +25,11 @@ export function loginUser({ email, password }) {
 
 //get all the usera from the DB
 export function getUsers() {
+  console.log('GETTING USERS');
   return (dispatch) => {
     axios.get(`${API_URL}/users`)
     .then(response => {
+      console.log('RESPONSE',response.data);
       dispatch({
         type: 'SET_ALL_USERS',
         allUsers: response.data,

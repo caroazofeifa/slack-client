@@ -44,6 +44,8 @@ class ChatContainer extends React.Component {
       this.updateChatIncommingMessage(username, data, time, id);
     });
     this.props.getUsers();
+    
+    // console.log(this.props.allUsers);
   }
   startConversation(id) {
     // console.log('Start conversation:' + id + ' & ' +this.props.userData.userData._id)

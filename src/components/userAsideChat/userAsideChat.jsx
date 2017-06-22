@@ -14,7 +14,6 @@ class User extends React.Component {
   }
   handleClick(event) {
     this.props.onClick(this.props.user._id,this.props.user.profile.firstName);
-    event.target.value='';
   }
   render() {
     if (this.props.selected) {
@@ -25,7 +24,6 @@ class User extends React.Component {
     return (
       <a key={ this.props.user._id } onClick={ this.handleClick }><span></span>
       <span
-      
           className={`user-status ${stateOfChat} offline`} 
           id={ this.props.user._id } >
           { this.props.user.profile.firstName }
@@ -35,4 +33,4 @@ class User extends React.Component {
   }
 }
 
-module.exports = User;
+export default User;

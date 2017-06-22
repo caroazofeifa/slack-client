@@ -1,10 +1,12 @@
 import React from 'react';
 import './asideChat.scss';
+import User from '../userAsideChat/userAsideChat';
+import Channel from '../channelAsideChat/channelAsideChat';
 
 const preload = '../src/images/';
 
-const User = require('../userAsideChat/userAsideChat');
-
+// const User = require('../userAsideChat/userAsideChat');
+// const Channel = require('../channelAsideChat/channelAsideChat');
 class Aside extends React.Component {
   constructor(props) {
     super(props);
@@ -14,9 +16,24 @@ class Aside extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick(info,user) {
-    this.setState({userSelected:user})
-    this.props.startConversation(info);
+    console.log('INFO',info, 'USER',user);
+    this.setState({userSelected:user})//name user
+    this.props.startConversation(info);//id user
   }
+  // image(){
+  //   const myId = this.props.userData.userData._id;
+  //   const user1 = this.props.chatInfo.chat.user1;
+  //   const user2 = this.props.chatInfo.chat.user2;
+  //   const userImage =
+  //   this.props.allUsers.allUsers
+  //   .map((user) => (
+  //     if(user._id ==){
+
+  //     }   
+      
+  //   ))
+  // }
+
   render() {
     
     return (
@@ -35,10 +52,12 @@ class Aside extends React.Component {
               <a><span className='channels-options'>ALL THREADS</span></a>
               <a><span className='channels-options'>CHANNELS</span></a>
               <div className='channels'>
-                <a><span className='channel'>Channel 1</span> </a>
-                <a><span className='channel'>Channel 1</span> </a>
-                <a><span className='channel'>Channel 1</span> </a>
-                <a><span className='channel'>Channel 1</span> </a>
+                <Channel
+                    //key={ user._id }
+                    //user= {user}    
+                    onClick={ this.handleClick.bind(this) }
+                    selected={ this.state.userSelected=='general' ? true : false }
+                  />
               </div>
             </div>
             <div className='direct-messages'>

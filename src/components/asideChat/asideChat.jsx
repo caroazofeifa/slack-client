@@ -16,18 +16,22 @@ class Aside extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
   }
+  componentDidMount(){
+    this.setState({userSelected:'general'});//name channel
+    this.props.startConversationChannel('general');
+  }
   handleClick(info,user) {
     this.setState({userSelected:user})//name user
     this.props.startConversation(info);//id user
   }
   handleClickChannel(channelName) {
-    this.setState({userSelected:channelName})//name channel
+    this.setState({userSelected:channelName});//name channel
     this.props.startConversationChannel(channelName);//id channel
   }
   render() {
     
     return (
-      <div className='aside col-md-2'>
+      <div className='aside col-md-2 col-xs-4 col-sm-4'>
       <div className='row'>
         <header className='col-md-12 header'>
           <div className='header-content aside-margin-left'>

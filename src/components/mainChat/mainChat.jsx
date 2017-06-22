@@ -33,7 +33,7 @@ class Chat extends React.Component {
   };
   render() {
     return (
-      <div className='col-md-7 '>
+      <div className='col-md-7 col-xs-8 col-sm-8'>
         <main className='main__position'>
           <div className='row'>
             <div 

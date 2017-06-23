@@ -252,6 +252,7 @@ export function updateChat(username, data, time, newChat, socket) {
 export function updateChannel(username, data, time, newChannel, socket) {
   return (dispatch) => {
     const messagePost = { owner: username, content: data, time };
+    console.log('Update channel messahe',messagePost);
     Promise.all([
       axios.post(`${API_URL}/messages`, messagePost)
       .then(response => {

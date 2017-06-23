@@ -108,6 +108,7 @@ class ChatContainer extends React.Component {
         if (this.props.chatInfo.channel !== undefined) {
           //Const of the channel updated
           const channelUpdate = { _id: this.props.chatInfo.channel._id, name: this.props.chatInfo.channel.name, messages: this.props.chatInfo.channel.messages };
+          console.log('Update channel');
           this.props.updateChannel(this.props.userData.userData.firstName, messageI, finalTime, channelUpdate, socket);
         }
       }

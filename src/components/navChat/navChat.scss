@@ -57,7 +57,7 @@
     font-size: 15.251px;
     font-weight: 700;
     line-height: 13.5px;
-    margin: 5.2rem 0 0 30px;
+    margin: 5.2rem 0 0 0;
 }
 
 .imageNavBarLeft{
@@ -163,89 +163,136 @@
     flex-direction: row; 
     align-items: center;
 }
-
 /*Responsive*/
-@media only screen and (max-width: 950px) {
-    // .navBarRight {
-    //     // width: 16px;
-    //     // height: 16px;
-    //     //margin-left: 1.1rem;
-    // }
-    // .imageNavBarRight {
-    //     //margin: 0px 0 0 15px;
-    //     padding: 60px;
-    // }
-    // .navBarLeft{
-    //     padding-left: 1rem;
-    //     //display: none;
-    //     width:40%
-    // }
-    // .images {
-    //     height: 20px;
-    //     display: none;
-    // }
-    .searchInputNavBar{
-        display: none;        
+@media only screen and (max-width: 980px) {
+    .navBarRight {
+        width: auto;
+        margin-left: 1.1rem;
     }
-    .searchInputImage {
-        position: relative;
-        bottom: 8px;
-        left: -40px;
-        width: 16px;
-        height: 16px;
-        margin-top: 1.5rem;
-        //margin-right: 1.5rem;
-        /* margin-right: 5rem; */
+    .imageNavBarRight {
+        margin: 0px 0 0 15px;
+    }
+    .navBarLeft{
+        padding-left: 1rem;
     }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 720px) {
     .navBarRight {
-        // width: 16px;
-        // height: 16px;
-        //margin-left: 1.1rem;
+        width: auto;
+        margin-left: 1.1rem;
     }
     .imageNavBarRight {
-        //margin: 0px 0 0 15px;
-        //display: none;
+        margin: 0px 0 0 15px;
     }
     .navBarLeft{
         flex-direction: column; 
-        padding-left: 3rem;
-        // display: none
+        padding-left: 1rem;
     }
     .titleNavBarLeft {
-        margin: 23px 0 0px -68px;
+        margin: 13px 0 7px -68px;
     }
     .images {
         height: 20px;
+        display: none;
+    }
+    .title{
         display: none;
     }
     .imageNavBarLeft {
         margin-left: 13px;
     }
 }
-@media only screen and (max-width: 500px) {
-    .titleNavBarLeft{
+@media only screen and (max-width: 589px) {
+    .images {
+        height: 20px;
         display: none;
-    }
-    .navBarRight {
-        width: 100%;
-    }
-    .searchInputImage {
-        position: relative;
-        bottom: 8px;
-        left: 27px;
-        width: 16px;
-        height: 16px;
-        margin-top: 1.5rem;
-        display: none;
-        /* margin-right: 5rem; */
     }
 }
 
 
-@media only screen and (max-width: 830px) {
+// /*Responsive*/
+// @media only screen and (max-width: 950px) {
+//     // .navBarRight {
+//     //     // width: 16px;
+//     //     // height: 16px;
+//     //     //margin-left: 1.1rem;
+//     // }
+//     // .imageNavBarRight {
+//     //     //margin: 0px 0 0 15px;
+//     //     padding: 60px;
+//     // }
+//     // .navBarLeft{
+//     //     padding-left: 1rem;
+//     //     //display: none;
+//     //     width:40%
+//     // }
+//     // .images {
+//     //     height: 20px;
+//     //     display: none;
+//     // }
+//     // .searchInputNavBar{
+//     //     display: none;        
+//     // }
+//     // .searchInputImage {
+//     //     position: relative;
+//     //     bottom: 8px;
+//     //     left: -40px;
+//     //     width: 16px;
+//     //     height: 16px;
+//     //     margin-top: 1.5rem;
+//     //     //margin-right: 1.5rem;
+//     //     /* margin-right: 5rem; */
+//     // }
+// }
+
+// @media only screen and (max-width: 800px) {
+//     .navBarRight {
+//         // width: 16px;
+//         // height: 16px;
+//         //margin-left: 1.1rem;
+//     }
+//     .imageNavBarRight {
+//         //margin: 0px 0 0 15px;
+//         //display: none;
+//     }
+//     .navBarLeft{
+//         flex-direction: column; 
+//         padding-left: 3rem;
+//         // display: none
+//     }
+//     .titleNavBarLeft {
+//         margin: 23px 0 0px -68px;
+//     }
+//     .images {
+//         height: 20px;
+//         display: none;
+//     }
+//     .imageNavBarLeft {
+//         margin-left: 13px;
+//     }
+// // }
+// @media only screen and (max-width: 600px) {
+//     .titleNavBarLeft{
+//         display: none;
+//     }
+//     // .navBarRight {
+//     //     width: 100%;
+//     // }
+//     // .searchInputImage {
+//     //     position: relative;
+//     //     bottom: 8px;
+//     //     left: 27px;
+//     //     width: 16px;
+//     //     height: 16px;
+//     //     margin-top: 1.5rem;
+//     //     display: none;
+//     //     /* margin-right: 5rem; */
+//     // }
+// }
+
+
+// @media only screen and (max-width: 830px) {
 
     
-}
+// }

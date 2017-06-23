@@ -37,4 +37,4 @@ class DateMessage extends React.Component {
   }
 }
 
-module.exports = DateMessage;
+export default DateMessage;

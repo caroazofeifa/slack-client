@@ -1,29 +1,39 @@
 @import '../../scss/helpers/_variables';
 
-
 .listContainer {
   height: $main__hight+$footer__hight;
   background-color: #f9f9f9;
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgb(231, 231, 231);
+  border-left: 1px solid #E6E6E6;
   background-color: rgb(249, 249, 249);
-  border-radius: none;
+  border-radius: 0px;
 }
 .listContainer > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
+  border-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-left-width: 0px;
 }
 .listContainer > ul > li {
   list-style: none;
   margin: 0;
   padding-left: 3.5rem;
-  border: 1px solid #E6E6E6;
-  background-color: #f9f9f9;
+  border-radius: 0px;
   line-height: 5rem;
-  border-radius: none;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-left-width: 0px;
 }
 .listArrow {
   color: black;
@@ -35,10 +45,28 @@
   font-size: 16px;
   font-family: "Open Sans";
   color: rgb(65, 65, 66);
-  border-radius: none;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-left-width: 0px;
+  border-bottom: 1px solid #E6E6E6;
+
+  border-radius: 0px;
+}
+.list-group-item:first-child {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 @media only screen and (max-width: 990px) {
     .details {
-        display: none;
+      display: none;
     }
 }

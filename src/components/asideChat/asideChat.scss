@@ -186,6 +186,7 @@ $brand-green: #20a766;
   // border-radius: 10px;
   overflow: hidden;
   overflow-y: auto;
+  overflow-x: auto;
   position:relative;   
 }
 #style-2::-webkit-scrollbar-track
@@ -203,5 +204,15 @@ $brand-green: #20a766;
 {
 	border-radius: 10px;
 	background-color: #AB9BAA;
+}
+.imgArrow__header{
+  height: 0.5rem;
+  width: 0.9rem;
+  margin: 1rem;
+}
+@media only screen and (max-width: 400px) {
+  .team{
+    display: none;
+  }
 }
 

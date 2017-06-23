@@ -7,7 +7,6 @@ class Nav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
     };
   }
   render() {
@@ -36,15 +35,13 @@ class Nav extends React.Component {
         </header>
         <div className='image-background row imag-background'>
           <div className='col-md-12' />
-          {/*</div>*/}
         </div>
         <div className='background row'>
           <div className='col-md-12' />
-          {/*</div>*/}
         </div>
       </div>
     );
   }
 }
 
-module.exports = Nav;
+export default Nav;

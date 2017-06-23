@@ -12,6 +12,7 @@ $marginCalc: calc((8.7vh - 30px)/2);
 	background:#F3F3F3;
   overflow: hidden;
   overflow-y: auto;
+  overflow-x: auto;
   position:relative;
   //This doesnt work in mozilla
   // display: flex;
@@ -106,7 +107,8 @@ $marginCalc: calc((8.7vh - 30px)/2);
   background-color: $main-center__background;
 }
 .footer__center{
-  background-color: $footer-right__background;
+  //background-color: $footer-right__background;
   height: $footer__hight;
-  border-top: 1px solid rgb(231, 231, 231)
+  border-top: 1px solid rgb(231, 231, 231);
+  background-color: rgb(241, 241, 241);
 }

@@ -4,38 +4,33 @@ import User from '../userAsideChat/userAsideChat';
 import Channel from '../channelAsideChat/channelAsideChat';
 
 const preload = '../src/images/';
-const nameOfTheChannel ='general';
+const nameOfTheChannel = 'general';
 
-// const User = require('../userAsideChat/userAsideChat');
-// const Channel = require('../channelAsideChat/channelAsideChat');
 class Aside extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userSelected: '',
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleClickChannel = this.handleClickChannel.bind(this);
   }
-  componentDidMount(){
-    this.setState({userSelected:'general'});//name channel
-    this.props.startConversationChannel('general');
-  }
-  handleClick(info,user) {
-    this.setState({userSelected:user})//name user
-    this.props.startConversation(info);//id user
+  handleClick(info, user) {
+    this.props.handleClick(info, user);//id user
   }
   handleClickChannel(channelName) {
-    this.setState({userSelected:channelName});//name channel
-    this.props.startConversationChannel(channelName);//id channel
+    this.props.handleClickChannel(channelName);//id channel
   }
   render() {
-    
     return (
       <div className='aside col-md-2 col-xs-4 col-sm-4'>
       <div className='row'>
         <header className='col-md-12 header'>
           <div className='header-content aside-margin-left'>
-             <span className='white-text'>Konrad Group</span>
+            <div className='team'>
+              <span className='white-text'>Konrad Group
+                <img className='imgArrow__header' src={ `${preload}learnDown.png` } />
+              </span>
+             </div>
              <span className='user-status online_notselected'>{ `${this.props.userData.userData.firstName} ${this.props.userData.userData.lastName}` }</span>
           </div>
         </header>
@@ -47,11 +42,9 @@ class Aside extends React.Component {
               <a><span className='channels-options'>CHANNELS</span></a>
               <div className='channels'>
                 <Channel
-                    //key={ user._id }
-                    //user= {user}    
-                    onClick={ this.handleClickChannel.bind(this) }
-                    selected={ this.state.userSelected==nameOfTheChannel ? true : false }
-                  />
+                  onClick={ this.handleClickChannel.bind(this) }
+                  selected={ this.props.userSelected === nameOfTheChannel }
+                />
               </div>
             </div>
             <div className='direct-messages'>
@@ -61,9 +54,9 @@ class Aside extends React.Component {
                 .map((user) => (
                   <User
                     key={ user._id }
-                    user= {user}    
+                    user={ user }
                     onClick={ this.handleClick.bind(this) }
-                    selected={ this.state.userSelected==user.profile.firstName ? true : false }
+                    selected={ this.props.userSelected === user.profile.firstName }
                     usersConnected={ this.props.usersConnected }
                   />
                   ))
@@ -84,4 +77,4 @@ class Aside extends React.Component {
   }
 }
 
-module.exports = Aside;
+export default Aside;

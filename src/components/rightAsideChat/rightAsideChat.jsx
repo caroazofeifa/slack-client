@@ -1,6 +1,8 @@
 import React from 'react';
 import './rightAsideChat.scss';
 
+const preload = '../../src/images/';
+
 class RightAside extends React.Component {
   render() {
     return (
@@ -10,40 +12,34 @@ class RightAside extends React.Component {
             <ul className='list-group'>
               <li className='list-group-item'>Channel Details
                 <span className='listArrow'>
-                  {/*<img src={ arrow } alt='' />*/}
-                  >
+                  <img className='imgMessage' src={ `${preload}learn.png` } />
                 </span>
               </li>
               <li className='list-group-item'>4 Pinned Items
                 <span className='listArrow'>
-                  {/*<img src={ arrow } alt='' />*/}
-                  >
+                  <img className='imgMessage' src={ `${preload}learn.png` } />
                 </span>
               </li>
               <li className='list-group-item'>18 Members
                 <span className='listArrow'>
-                  {/*<img src={ arrow } alt='' />*/}
-                  >
+                  <img className='imgMessage' src={ `${preload}learn.png` } />
                 </span>
               </li>
               <li className='list-group-item'>Shared Files
                 <span className='listArrow'>
-                  {/*<img src={ arrow } alt='' />*/}
-                  >
+                  <img className='imgMessage' src={ `${preload}learn.png` } />
                 </span>
               </li>
               <li className='list-group-item'>Notification Preferences
                 <span className='listArrow'>
-                  {/*<img src={ arrow } alt='' />*/}
-                  >
+                  <img className='imgMessage' src={ `${preload}learn.png` } />
                 </span>
               </li>
             </ul>
           </div>
         </div>
       </div>
-// {/*FIN DEL CHUNCHE DEL LADO DERECHO*/}
     );
   }
 }
-module.exports = RightAside;
+export default RightAside;

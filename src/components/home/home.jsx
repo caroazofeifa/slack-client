@@ -1,10 +1,10 @@
 import React from 'react';
 import './home.scss';
 
-const Aside = require('../asideChat/asideChat');
-const NavChat = require('../navChat/navChat');
-const MainChat = require('../mainChat/mainChat');
-const RightAside = require('../rightAsideChat/rightAsideChat');
+import AsideChatContainer from '../../containers/AsideChatContainer';
+import NavChat from '../navChat/navChat';
+import MainChat from '../mainChat/mainChat';
+import RightAside from '../rightAsideChat/rightAsideChat';
 
 class Menu extends React.Component {
   constructor(props) {
@@ -16,14 +16,14 @@ class Menu extends React.Component {
   render() {
     return (
       <div className='row home'>
-        <Aside
+        <AsideChatContainer
           startConversation={ this.props.startConversation }
           startConversationChannel={ this.props.startConversationChannel }
           allUsers={ this.props.allUsers }
           userData={ this.props.userData }
           usersConnected={ this.props.usersConnected }
         />
-        <NavChat 
+        <NavChat
           chatInfo={ this.props.chatInfo }
           allUsers={ this.props.allUsers }
           userData={ this.props.userData }
@@ -38,4 +38,4 @@ class Menu extends React.Component {
   }
 }
 
-module.exports = Menu;
+export default Menu;

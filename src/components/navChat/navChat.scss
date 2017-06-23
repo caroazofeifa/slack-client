@@ -165,38 +165,87 @@
 }
 
 /*Responsive*/
-@media only screen and (max-width: 980px) {
-    .navBarRight {
-        width: auto;
-        margin-left: 1.1rem;
+@media only screen and (max-width: 950px) {
+    // .navBarRight {
+    //     // width: 16px;
+    //     // height: 16px;
+    //     //margin-left: 1.1rem;
+    // }
+    // .imageNavBarRight {
+    //     //margin: 0px 0 0 15px;
+    //     padding: 60px;
+    // }
+    // .navBarLeft{
+    //     padding-left: 1rem;
+    //     //display: none;
+    //     width:40%
+    // }
+    // .images {
+    //     height: 20px;
+    //     display: none;
+    // }
+    .searchInputNavBar{
+        display: none;        
     }
-    .imageNavBarRight {
-        margin: 0px 0 0 15px;
-    }
-    .navBarLeft{
-        padding-left: 1rem;
+    .searchInputImage {
+        position: relative;
+        bottom: 8px;
+        left: -40px;
+        width: 16px;
+        height: 16px;
+        margin-top: 1.5rem;
+        //margin-right: 1.5rem;
+        /* margin-right: 5rem; */
     }
 }
 
-@media only screen and (max-width: 589px) {
+@media only screen and (max-width: 800px) {
     .navBarRight {
-        width: auto;
-        margin-left: 1.1rem;
+        // width: 16px;
+        // height: 16px;
+        //margin-left: 1.1rem;
     }
     .imageNavBarRight {
-        margin: 0px 0 0 15px;
+        //margin: 0px 0 0 15px;
+        //display: none;
     }
     .navBarLeft{
         flex-direction: column; 
-        padding-left: 1rem;
+        padding-left: 3rem;
+        // display: none
     }
     .titleNavBarLeft {
-        margin: 13px 0 7px -68px;
+        margin: 23px 0 0px -68px;
     }
     .images {
         height: 20px;
+        display: none;
     }
     .imageNavBarLeft {
         margin-left: 13px;
     }
+}
+@media only screen and (max-width: 500px) {
+    .titleNavBarLeft{
+        display: none;
+    }
+    .navBarRight {
+        width: 100%;
+    }
+    .searchInputImage {
+        position: relative;
+        bottom: 8px;
+        left: 27px;
+        width: 16px;
+        height: 16px;
+        margin-top: 1.5rem;
+        display: none;
+        /* margin-right: 5rem; */
+    }
+}
+
+
+@media only screen and (max-width: 830px) {
+
+    
 }

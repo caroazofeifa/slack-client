@@ -1,15 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form';
 import { loginUser } from '../redux/actions/index';
-
+import Nav from '../components/navLog/navLog';
 import '../components/modalLog/modalLog.scss';
 
 const preload = '../src/images/';
-
-const Nav = require('../components/navLog/navLog');
-// const Modal = require('./ModalLoginContainer');
 
 const form = reduxForm({
   form: 'login',
@@ -20,9 +16,10 @@ class Login extends React.Component {
     super(props);
     this.state = {
     };
+    this.renderAlert = this.renderAlert.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
   handleFormSubmit(formProps) {
-    // console.log('calling loginUser');
     this.props.loginUser(formProps);
   }
   renderAlert() {
@@ -54,11 +51,9 @@ class Login extends React.Component {
               </div>
               <div className='col-md-8 col-md-offset-2 center'>
                 <Field name='password' className='inputText' component='input' type='password' placeholder='*******' />
-                {/*<Link to='/messages'>*/}
                   <button className='buttonArrow' href='#' id='' type='submit' >
                     <img className='imgArrow' src={ `${preload}loginarrow.svg` } />
                   </button>
-                {/*</Link>  */}
               </div>
            </form>
             <div className='col-md-8 col-md-offset-2 center'>

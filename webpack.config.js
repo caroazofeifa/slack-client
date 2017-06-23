@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const precss = require('precss');
 const autoprefixer = require('autoprefixer');
@@ -15,19 +15,19 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
   },
-   node: {
+  node: {
     fs: 'empty',
-    tls: 'empty'
+    tls: 'empty',
   },
   stats: {
     colors: true,
     reasons: true,
-    chunks: true
+    chunks: true,
   },
   module: {
     rules: [
@@ -35,11 +35,11 @@ module.exports = {
         enforce: 'pre',
         test: [/\.js$/, /\.jsx$/],
         loader: 'eslint-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.json$/,
-        loader: 'json-loader'
+        loader: 'json-loader',
       },
       {
         test: /\.jsx?$/,
@@ -49,8 +49,8 @@ module.exports = {
       {
         test: [/\.scss$/],
         use: [
-          'style-loader',// pega los archivos en el CSS
-          'css-loader',// reconoce los imports
+          'style-loader', // paste the files in the css
+          'css-loader', // recognice the imports
           'sass-loader',
         ],
       },
@@ -60,7 +60,7 @@ module.exports = {
         query: {
         // Inline images smaller than 10kb as data URIs        limit: 10000
         },
-      }
+      },
     ],
   },
   plugins: [

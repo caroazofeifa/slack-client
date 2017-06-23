@@ -12,13 +12,13 @@ class Message extends React.Component {
     return (
       <div>
         <div className='row message'>
-          <div className='col-md-2'>
+          <div className='col-lg-2 col-md-2 col-sm-3 col-xs-6'>
             <img className='imgMessage' src={ `${preload}${this.props.message.owner}.png` } />
           </div>
-          <div className='col-md-10'>
+          <div className='col-lg-10 col-md-10 col-sm-9 col-xs-6'>
             <div className='messageTitle'>
               <h4 className='name__style'> {this.props.message.owner}</h4>
-              <h5 className='time__style'> 
+              <h5 className='time__style'>
                 {this.props.message.time}
               </h5>
             </div>
@@ -32,4 +32,4 @@ class Message extends React.Component {
   }
 }
 
-module.exports = Message;
+export default Message;

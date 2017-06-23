@@ -5,20 +5,21 @@ const DEFAULT_STATE = {
   messages: [],
   channel: [],
 };
-
+//SET_CHAT
 const chatReducer = (state, action) => {
   return Object.assign({}, state, { chat: action.chat });
 };
+//SET_MESSAGE
 const messageReducer = (state, action) => {
   return Object.assign({}, state, { messages: action.messages });
 };
+//UPDATE_MESSAGE
 const updateMessageReducer = (state, action) => {
-  // console.log('STATE', state);
-  // console.log('ACT.MESS', action.messages);
   const newMessages = state.messages;
   newMessages.push(action.messages);
   return Object.assign({}, state, { messages: newMessages });
 };
+//SET_CHANNEL
 const channelReducer = (state, action) => {
   return Object.assign({}, state, { channel: action.channel });
 };
@@ -29,7 +30,7 @@ export default function (state = DEFAULT_STATE, action) {
       return state.chat;
     case SET_CHAT:
       return chatReducer(state, action);
-     case GET_CHANNEL:
+    case GET_CHANNEL:
       return state.chat;
     case SET_CHANNEL:
       return channelReducer(state, action);

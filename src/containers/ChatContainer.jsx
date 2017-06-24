@@ -7,7 +7,7 @@ import store from '../redux/store';
 import { SET_USER_DATA } from '../redux/actions/types';
 import ChatHome from '../components/home/home';
 // const ChatHome = require('../components/home/home');
-
+const API_SOCKET ='http://localhost:3000';
 const io = require('socket.io-client');
 
 let socket = null;
@@ -38,7 +38,7 @@ class ChatContainer extends React.Component {
       });
     }
     //Connects the socket
-    socket = io.connect('http://localhost:3000');
+    socket = io.connect(API_SOCKET);
     //Sends register the user in the socket as connected
     socket.emit('register', token._id);
     //Sends adduser to the usernames in the socket

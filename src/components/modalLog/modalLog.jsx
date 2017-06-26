@@ -16,7 +16,7 @@ class ModalLog extends React.Component {
         <div className='modalLogin' >
           <div className='row' >
             <div className='col-md-4 col-md-offset-4' >
-              <img className='imageLogo' src={ `${preload}slacklogo.svg` } />
+              <img className='imageLogo' src={require(`../images/slacklogo.svg`) } />
             </div>
             <div className='col-md-8 col-md-offset-2 center' >
               <h3 className='title'>Sign in</h3>
@@ -27,7 +27,7 @@ class ModalLog extends React.Component {
             <div className='col-md-8 col-md-offset-2 center'>
               <input className='inputText' type='text' placeholder='*******' />
               <button className='buttonArrow' href='#' id='' >
-                <img className='imgArrow' src={ `${preload}loginarrow.svg` } />
+                <img className='imgArrow' src={require(`../images/loginarrow.svg`) } />
               </button>
             </div>
             <div className='col-md-8 col-md-offset-2 center'>

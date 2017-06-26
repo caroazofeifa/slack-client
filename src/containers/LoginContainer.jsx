@@ -52,7 +52,7 @@ class Login extends React.Component {
               <div className='col-md-8 col-md-offset-2 center'>
                 <Field name='password' className='inputText' component='input' type='password' placeholder='*******' />
                   <button className='buttonArrow' href='#' id='' type='submit' >
-                    <img className='imgArrow' src={ `${preload}loginarrow.svg` } />
+                    <img className='imgArrow' src={require(`../images/loginarrow.svg` )} />
                   </button>
               </div>
            </form>

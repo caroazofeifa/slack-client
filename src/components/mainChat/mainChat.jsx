@@ -65,11 +65,11 @@ class Chat extends React.Component {
             <div className='col-md-12 footer__center'>
               <div className='messageEntry'>
                 <button className='buttonPlus' href='#' id='' >
-                  <img className='imgPlus' src={ `${preload}plus.svg` } />
+                  <img className='imgPlus' src={require(`../../images/plus.svg`) } />
                 </button>
                 <input name='inputMessage' ref='form' className='inputMessage' onKeyDown={ this.handleKeyPress } type='text' placeholder='Message' />
                 <button className='buttonSmile' href='#' id='' >
-                  <img className='imgSmile' src={ `${preload}smile.svg` } />
+                  <img className='imgSmile' src={require(`../../images/smile.svg`) } />
                 </button>
               </div>
             </div>

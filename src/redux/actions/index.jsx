@@ -3,9 +3,10 @@ import Cookies from 'universal-cookie';
 import { SET_USER_DATA, SET_CHAT, SET_MESSAGE, UPDATE_MESSAGE, SET_CHANNEL } from './types';
 import store from '../../redux/store';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://sheltered-lake-90475.herokuapp.com/api';
 
 export function loginUser({ email, password }) {
+  console.log('LOGIN CLIENT')
   return (dispatch) => {
     axios.post(`${API_URL}/auth/login`, { email, password })
     .then(response => {

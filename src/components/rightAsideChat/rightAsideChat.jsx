@@ -12,27 +12,27 @@ class RightAside extends React.Component {
             <ul className='list-group'>
               <li className='list-group-item'>Channel Details
                 <span className='listArrow'>
-                  <img className='imgMessage' src={ `${preload}learn.png` } />
+                  <img className='imgMessage' src={require(`../../images/learn.png`)} />
                 </span>
               </li>
               <li className='list-group-item'>4 Pinned Items
                 <span className='listArrow'>
-                  <img className='imgMessage' src={ `${preload}learn.png` } />
+                  <img className='imgMessage' src={require(`../../images/learn.png`)} />
                 </span>
               </li>
               <li className='list-group-item'>18 Members
                 <span className='listArrow'>
-                  <img className='imgMessage' src={ `${preload}learn.png` } />
+                  <img className='imgMessage' src={require(`../../images/learn.png`)} />
                 </span>
               </li>
               <li className='list-group-item'>Shared Files
                 <span className='listArrow'>
-                  <img className='imgMessage' src={ `${preload}learn.png` } />
+                  <img className='imgMessage' src={require(`../../images/learn.png`)} />
                 </span>
               </li>
               <li className='list-group-item'>Notification Preferences
                 <span className='listArrow'>
-                  <img className='imgMessage' src={ `${preload}learn.png` } />
+                  <img className='imgMessage' src={require(`../../images/learn.png`)} />
                 </span>
               </li>
             </ul>

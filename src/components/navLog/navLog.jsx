@@ -13,7 +13,7 @@ class Nav extends React.Component {
     return (
       <div className='container-fluid'>
         <header className='row header'>
-          <a className='imagLog' ><img className='' src={ `${preload}icon.png` } /></a>
+          <a className='imagLog' ><img className='' src={require(`../../images/icon.png`) } /></a>
           <div className='col-md-12'>
             <nav className='sideNav'>
               <ul>

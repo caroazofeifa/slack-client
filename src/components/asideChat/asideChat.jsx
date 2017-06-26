@@ -28,7 +28,7 @@ class Aside extends React.Component {
           <div className='header-content aside-margin-left'>
             <div className='team'>
               <span className='white-text'>Konrad Group
-                <img className='imgArrow__header' src={ `${preload}learnDown.png` } />
+                <img className='imgArrow__header' src={require(`../../images/learnDown.png`) } />
               </span>
              </div>
              <span className='user-status online_notselected'>{ `${this.props.userData.userData.firstName} ${this.props.userData.userData.lastName}` }</span>
@@ -67,7 +67,7 @@ class Aside extends React.Component {
         <footer className='col-md-12 footer '>
           <div className='aside-margin-left'>
             <span className='white-text'>
-              <img src={ `${preload}searchAside.svg` } className='search-icon' alt='Search' /> Search
+              <img src={require(`../../images/searchAside.svg`) } className='search-icon' alt='Search' /> Search
             </span>
           </div>
         </footer>

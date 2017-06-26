@@ -45,7 +45,7 @@ class Contact extends React.Component {
         <footer className='col-md-12 footer '>
           <div className='aside-margin-left'>
             <span className='white-text'>
-              <img src={ `${preload}searchAside.svg` } className='search-icon' alt='Search' /> Search
+              <img src={require(`../images/searchAside.svg`) } className='search-icon' alt='Search' /> Search
             </span>
           </div>
         </footer>

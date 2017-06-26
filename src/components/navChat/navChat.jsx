@@ -29,21 +29,21 @@ class Nav extends React.Component {
                     </h3>
                   </div>
                   <div className='images'>
-                    <img src='./src/components/navChat/star.svg' className='imageNavBarLeft starImage' />
-                    <img src='./src/components/navChat/user.svg' className='imageNavBarLeft userImage' />
-                    <img src='./src/components/navChat/pin.svg' className='imageNavBarLeft pinImage' />
-                    <img src='./src/components/navChat/add.svg' className='imageNavBarLeft addImage' />
+                    <img src={require(`./star.svg`)} className='imageNavBarLeft starImage' />
+                    <img src={require(`./user.svg`)} className='imageNavBarLeft userImage' />
+                    <img src={require(`./pin.svg`)} className='imageNavBarLeft pinImage' />
+                    <img src={require(`./add.svg`)} className='imageNavBarLeft addImage' />
                     <p className='textNavBarLeft'>Add a topic</p>
                   </div>
               </div>
               <div className='navBarRight'>
                   <div className='searchInputContainer'>
                     <input type='text' className='searchInputNavBar' name='srch-term' placeholder='Search' />
-                    <img src='./src/components/navChat/search.svg' className='searchInputImage' />
+                    <img src={require(`./search.svg`)}className='searchInputImage' />
                   </div>
-                  <img src='./src/components/navChat/phone.svg' className='imageNavBarRight callImage' />
-                  <img src='./src/components/navChat/configurations.svg' className='imageNavBarRight settingsImage' />
-                  <img src='./src/components/navChat/fileSettings.svg' className='imageNavBarRight filesImage' />
+                  <img src={require(`./phone.svg`)} className='imageNavBarRight callImage' />
+                  <img src={require(`./configurations.svg`)} className='imageNavBarRight settingsImage' />
+                  <img src={require(`./fileSettings.svg`)} className='imageNavBarRight filesImage' />
               </div>
           </div>
       </div>

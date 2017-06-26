@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import HomePage from '../../containers/ChatContainer';
-import Login from '../../containers/LoginContainer';
+import HomePage from './containers/ChatContainer';
+import Login from './containers/LoginContainer';
 // import Dashboard from './components/dashboard';
 // import RequireAuth from './components/auth/require-auth';
 

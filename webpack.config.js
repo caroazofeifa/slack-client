@@ -7,17 +7,20 @@ const webpack = require('webpack');
 module.exports = {
   context: path.join(__dirname, '/src'),
   entry: {
-    javascript: './components/app/app.jsx',
+    javascript: './app.jsx',
   },
-  devtool: 'eval',
-  devServer: {
-    historyApiFallback: true,
-  },
+  devtool: 'source-map',
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
   },
+  devServer: {
+    historyApiFallback: true,
+  },
   resolve: {
+    alias:{
+      'bootstrap-path': path.join(__dirname, '../node_modules/bootstrap-sass/assets/stylesheets/')
+    },
     extensions: ['.js', '.jsx', '.json'],
   },
   node: {

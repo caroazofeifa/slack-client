@@ -16,16 +16,12 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-  },
+    },
   resolve: {
     alias:{
-      'bootstrap-path': path.join(__dirname, '../node_modules/bootstrap-sass/assets/stylesheets/')
+        'bootstrap-path': path.join(__dirname, '../node_modules/bootstrap-sass/assets/stylesheets/')
     },
     extensions: ['.js', '.jsx', '.json'],
-  },
-  node: {
-    fs: 'empty',
-    tls: 'empty',
   },
   stats: {
     colors: true,
@@ -34,37 +30,32 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   enforce: 'pre',
-      //   test: [/\.js$/, /\.jsx$/],
-      //   loader: 'eslint-loader',
-      //   exclude: /node_modules/,
-      // },
       {
-        test: /\.json$/,
-        loader: 'json-loader',
-      },
-      {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: ['babel-loader'],
       },
       {
-        test: [/\.scss$/],
+        test: /\.scss$/,
         use: [
-          'style-loader', // paste the files in the css
-          'css-loader', // recognice the imports
-          'sass-loader',
-        ],
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+         ],
+      },
+      {
+        test: /\.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+        loader: 'file-loader?name=fonts/[name].[ext]'
       },
       {
         test: /\.(?:png|jpg|svg)$/,
         loader: 'url-loader',
         query: {
-        // Inline images smaller than 10kb as data URIs        limit: 10000
+        // Inline images smaller than 10kb as data URIs
         },
-      },
+      }
     ],
+
   },
   plugins: [
     new HtmlWebpackPlugin({

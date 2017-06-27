@@ -21,3 +21,6 @@ export const UPDATE_MESSAGE ='UPDATE_MESSAGE';
 
 export const GET_CHANNEL = 'GET_CHANNEL';
 export const SET_CHANNEL = 'SET_CHANNEL';
+
+export const SET_LOOGED = 'SET_LOOGED';
+export const GET_LOOGED = 'GET_LOOGED';

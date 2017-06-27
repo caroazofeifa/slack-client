@@ -31,18 +31,20 @@ class ChatContainer extends React.Component {
     const cookies = new Cookies();
     const token = cookies.get('token');
     //State, gets the user logged in the cookie information
-    if (token) {
-      store.dispatch({
-        type: SET_USER_DATA,
-        userData: token,
-      });
-    }
+    // if (token) {
+    //   store.dispatch({
+    //     type: SET_USER_DATA,
+    //     userData: token,
+    //   });
+    // }
     //Connects the socket
     socket = io.connect(API_SOCKET);
-    //Sends register the user in the socket as connected
-    socket.emit('register', token._id);
-    //Sends adduser to the usernames in the socket
-    socket.emit('adduser', token._id);
+    if (this.props.userData!==null && this.props.userData!==undefined){
+      //Sends register the user in the socket as connected
+      socket.emit('register', this.props.userData.userData._id);
+      //Sends adduser to the usernames in the socket
+      socket.emit('adduser',this.props.userData.userData._id);
+    }
     //Receives the data to update the chat.
     //Id for who the message is sent, content of the message, time, id of the user who sends the message, the id of the new message
     socket.on('updatechat', (idMessageFor, data, time, idMessageFrom, username, idMessage) => {

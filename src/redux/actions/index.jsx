@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 // import { BrowserRouter  } from 'react-router-dom';
-import { SET_USER_DATA, SET_CHAT, SET_MESSAGE, UPDATE_MESSAGE, SET_CHANNEL } from './types';
+import { SET_USER_DATA, SET_CHAT, SET_MESSAGE, UPDATE_MESSAGE, SET_CHANNEL, GET_LOOGED, SET_LOOGED } from './types';
 import store from '../../redux/store';
 
 const API_URL = 'https://sheltered-lake-90475.herokuapp.com/api';
@@ -15,13 +15,23 @@ export function loginUser({ email, password }) {
         type: SET_USER_DATA,
         userData: response.data.user,
       });
+      console.log('USER-->',response.data.user);
+      store.dispatch({
+        type: SET_LOOGED,
+        logged: true,
+      });
+      console.log('LOGGED',true);
       const cookies = new Cookies();
       cookies.set('token', response.data.user, { path: '/' });
       console.log('COOKIES');
-       window.location = '/messages';
+      // window.location = '/messages';
       //  BrowserRouter.push('/messages');
     })
     .catch((error) => {
+      store.dispatch({
+        type: SET_LOOGED,
+        logged: false,
+      });
       console.log('Error loginUser: ', error);
     });
   };

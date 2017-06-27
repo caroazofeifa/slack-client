@@ -11,7 +11,7 @@ const createRouter = () => (
     <div>
       {/*<Route exact path='/' render={ () => (<Redirect to='/login' />) } />*/}
       <Route exact path='/' component={ Login } />
-      <Route path='/messages' component={ HomePage } />
+      <Route exact path='/messages' component={ HomePage } />
      </div>
   </Router>
 );

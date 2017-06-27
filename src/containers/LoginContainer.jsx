@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { loginUser } from '../redux/actions/index';
+import { Redirect } from 'react-router';
 import Nav from '../components/navLog/navLog';
 import '../components/modalLog/modalLog.scss';
 const reactRouter = require('react-router-dom');
@@ -53,11 +54,15 @@ class Login extends React.Component {
               </div>
               <div className='col-md-8 col-md-offset-2 center'>
                 <Field name='password' className='inputText' component='input' type='password' placeholder='*******' />
-                  {/*<Link to='/messages'>*/}
-                    <button className='buttonArrow' href='#' id='' type='submit' >
-                      <img className='imgArrow' src={require(`../images/loginarrow.svg` )} />
-                    </button>
-                  {/*</Link>*/}
+                {this.props.chatInfo!==null && this.props.chatInfo!==undefined
+                  ? this.props.chatInfo.logged==true
+                    ? <Redirect to='/messages'/>
+                    :<Redirect to='/'/>
+                  :null
+                }
+                <button className='buttonArrow' href='#' id='' type='submit' >
+                  <img className='imgArrow' src={require(`../images/loginarrow.svg` )} />
+                </button>
               </div>
            </form>
             <div className='col-md-8 col-md-offset-2 center'>
@@ -75,6 +80,7 @@ function mapStateToProps(state) {
   return {
     errorMessage: state.auth.error,
     message: state.auth.message,
+    chatInfo: state.chatInfo,
   };
 }
 

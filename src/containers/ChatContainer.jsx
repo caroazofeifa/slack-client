@@ -7,7 +7,7 @@ import store from '../redux/store';
 import { SET_USER_DATA } from '../redux/actions/types';
 import ChatHome from '../components/home/home';
 // const ChatHome = require('../components/home/home');
-const API_SOCKET ='http://localhost:3000';
+const API_SOCKET ='https://sheltered-lake-90475.herokuapp.com/';
 const io = require('socket.io-client');
 
 let socket = null;

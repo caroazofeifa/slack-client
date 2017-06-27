@@ -4,6 +4,8 @@ import { Field, reduxForm } from 'redux-form';
 import { loginUser } from '../redux/actions/index';
 import Nav from '../components/navLog/navLog';
 import '../components/modalLog/modalLog.scss';
+const reactRouter = require('react-router-dom');
+const Link = reactRouter.Link;
 
 const preload = '../src/images/';
 
@@ -51,9 +53,11 @@ class Login extends React.Component {
               </div>
               <div className='col-md-8 col-md-offset-2 center'>
                 <Field name='password' className='inputText' component='input' type='password' placeholder='*******' />
-                  <button className='buttonArrow' href='#' id='' type='submit' >
-                    <img className='imgArrow' src={require(`../images/loginarrow.svg` )} />
-                  </button>
+                  {/*<Link to='/messages'>*/}
+                    <button className='buttonArrow' href='#' id='' type='submit' >
+                      <img className='imgArrow' src={require(`../images/loginarrow.svg` )} />
+                    </button>
+                  {/*</Link>*/}
               </div>
            </form>
             <div className='col-md-8 col-md-offset-2 center'>
